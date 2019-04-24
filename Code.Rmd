@@ -97,6 +97,7 @@ pairs(features, gap = 0, pch = ".")
 ```
 The three pairwise scatterplots all show that DF, CF, BF, AF and AN shows a linear relationship between each other, especially for AF and AN, AF and BF. However, we observe that data points in the third pairwise scatterplot spread more widely than in the first two pairwise sctterplots. The differences between three graphs can also show that the (linear) relationships decrease over time.
 
+After checking pairwise relationship plots, we study the relationship between each independent featues and their expert labels for each image and all data combined.
 ```{r}
 #relationship between expert label and NDAI image1
 expert_NDAI = data.frame(label = as.character(image1$expert_label), CORR = image1$CORR)
@@ -123,6 +124,55 @@ expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
 ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR All Data")
 ```
 The boxplots for CORR based on different labels show that CORR is on average higher for pixels marked as cloud than as not cloud. CORR also has a higher variance for those marked as cloud.
-This conclusion contradicts to the statement in the paper that high correlations over cloud-free areas or low clouds are expected. This is because high correlations for clouds also occur under rare circumstances. More importantly, recklessly declare clear for high CORR
 
-Therefore, we also 
+This conclusion contradicts to the statement in the paper that high correlations over cloud-free areas or low clouds are expected. This is because high correlations for clouds also occur under rare circumstances. More importantly, recklessly declare clear for high CORR pixels and cloudy for low CORR pixels will produce errors due to smoothness of surface terrain and the difference of attitudes of clouds.
+
+Therefore, we should also involve the feature SD to identify surfaces into our investigation. We first plot SD vs. Label independently for each image and all data.
+```{r}
+expert_SD = data.frame(label = as.character(image1$expert_label), SD = image1$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD image1")
+```
+```{r}
+expert_SD = data.frame(label = as.character(image2$expert_label), SD = image2$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD image2")
+```
+```{r}
+expert_SD = data.frame(label = as.character(image3$expert_label), SD = image3$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD image3")
+```
+```{r}
+expert_SD = data.frame(label = as.character(all$expert_label), SD = all$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD All Data")
+```
+From the boxplots for SD based on different labels, we can clearly see that the SD is higher for cloud pixels than those cloud-free ones. But the cloud-free pixels spread more widely. It can be explained that SD are usually small for radiation emanating from smooth surfaces.
+
+Finally, the thrid feature NDAI relates to the differences for isoreopic level of surface-leaving radiation between low-attitude clouds and snow-coved surfaces.
+```{r}
+expert_NDAI = data.frame(label = as.character(image1$expert_label), NDAI = image1$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI image1")
+```
+```{r}
+expert_NDAI = data.frame(label = as.character(image2$expert_label), NDAI = image2$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI image2")
+```
+```{r}
+expert_NDAI = data.frame(label = as.character(image3$expert_label), NDAI = image3$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI image3")
+```
+```{r}
+expert_NDAI = data.frame(label = as.character(all$expert_label), NDAI = all$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI All Data")
+```
+
+From the boxplots for NDAI based on different labels, we can clearly see that the NDAI is higher for cloud pixels than those cloud-free ones. The distrubition for pixels labeled as clouds are left skewed, while the distribution for cloud-free pixels are roughly symmetric. The distribution for three different image data are roughly the same as well.
+
+
+
