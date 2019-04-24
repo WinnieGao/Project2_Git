@@ -21,8 +21,65 @@ all = rbind(image1, image2, image3)
 
 * 1(b)
 ```{r}
+nrow(image1)
+sum(image1$expert_label == 1) / nrow(image1)
+sum(image1$expert_label == -1) / nrow(image1)
+sum(image1$expert_label == 0) / nrow(image1)
+```
+For image1, there are 115229 data points. We calculate % of pixels for the different classes: 17.77% classified as cloud, 43.78% as not cloud and 38.46% as unlabeled.
+```{r}
+nrow(image2)
+sum(image2$expert_label == 1) / nrow(image2)
+sum(image2$expert_label == -1) / nrow(image2)
+sum(image2$expert_label == 0) / nrow(image2)
+```
+For image2, there are 115110 data points. We calculate % of pixels for the different classes: 34.11% classified as cloud, 37.25% as not cloud and 28.64% as unlabeled.
+```{r}
+nrow(image3)
+sum(image3$expert_label == 1) / nrow(image3)
+sum(image3$expert_label == -1) / nrow(image3)
+sum(image3$expert_label == 0) / nrow(image3)
+```
+For image3, there are 115217 data points. We calculate % of pixels for the different classes: 18.44% classified as cloud, 29.29% as not cloud and 52.27% as unlabeled.
+```{r}
+nrow(all)
 sum(all$expert_label == 1) / nrow(all)
 sum(all$expert_label == -1) / nrow(all)
 sum(all$expert_label == 0) / nrow(all)
 ```
-After we combined three image data sets, we calculate % of pixels for the different classes: 23.43% classified as cloud, 36.78% classified as 
+After we combined three image data sets, there are 345556 data points. We calculate % of pixels for the different classes: 23.43% classified as cloud, 36.78% as not cloud and 39.79% as unlabeled.
+
+```{r}
+library(ggplot2)
+label = image1$expert_label
+label[label == 1] = "cloud"
+label[label == -1] = "not cloud"
+label[label == 0] = "unlabeled"
+image1_plot = data.frame(x = image1$x_coord, y = image1$y_coord, label = label)
+ggplot(data = image1_plot,aes(x = x, y = -y, color = label)) + geom_point() + scale_color_manual(values=c("white", "grey", "black"))
+```
+
+```{r}
+label = image2$expert_label
+label[label == 1] = "cloud"
+label[label == -1] = "not cloud"
+label[label == 0] = "unlabeled"
+image2_plot = data.frame(x = image2$x_coord, y = image2$y_coord, label = label)
+ggplot(data = image2_plot,aes(x = x, y = -y, color = label)) + geom_point() + scale_color_manual(values=c("white", "grey", "black"))
+```
+```{r}
+label = image3$expert_label
+label[label == 1] = "cloud"
+label[label == -1] = "not cloud"
+label[label == 0] = "unlabeled"
+image3_plot = data.frame(x = image3$x_coord, y = image3$y_coord, label = label)
+ggplot(data = image3_plot,aes(x = x, y = -y, color = label)) + geom_point() + scale_color_manual(values=c("white", "grey", "black"))
+```
+From the three plots, we can see the pattern that the pixels with same labels are connected to each other, and unmarked pixels stay around those marked as clouds. This pattern contradicts to our assumption that the samples are i.i.d., because the pixels adjcent to pixels marked as clouds are more likely to be marked as clouds.
+
+* (c)
+```{r}
+features = data.frame(image1$NDAI, image1$SD, image1$CORR, image1$DF, image1$CF, image1$BF, image1$AF, image1$AN)
+pairs(features, gap = 0, pch = ".")
+```
+
