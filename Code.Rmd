@@ -1,6 +1,8 @@
 ---
 title: "Proj 2"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -79,7 +81,48 @@ From the three plots, we can see the pattern that the pixels with same labels ar
 
 * (c)
 ```{r}
-features = data.frame(image1$NDAI, image1$SD, image1$CORR, image1$DF, image1$CF, image1$BF, image1$AF, image1$AN)
+# pairwise relationship between features for image1
+features = data.frame(NDAI = image1$NDAI, SD = image1$SD, CORR = image1$CORR, DF = image1$DF, CF = image1$CF, BF = image1$BF, AF = image1$AF, AN = image1$AN)
 pairs(features, gap = 0, pch = ".")
 ```
+```{r}
+# pairwise relationship between features for image3
+features = data.frame(NDAI = image2$NDAI, SD = image2$SD, CORR = image2$CORR, DF = image2$DF, CF = image2$CF, BF = image2$BF, AF = image2$AF, AN = image2$AN)
+pairs(features, gap = 0, pch = ".")
+```
+```{r}
+# pairwise relationship between features for image3
+features = data.frame(NDAI = image3$NDAI, SD = image3$SD, CORR = image3$CORR, DF = image3$DF, CF = image3$CF, BF = image3$BF, AF = image3$AF, AN = image3$AN)
+pairs(features, gap = 0, pch = ".")
+```
+The three pairwise scatterplots all show that DF, CF, BF, AF and AN shows a linear relationship between each other, especially for AF and AN, AF and BF. However, we observe that data points in the third pairwise scatterplot spread more widely than in the first two pairwise sctterplots. The differences between three graphs can also show that the (linear) relationships decrease over time.
 
+```{r}
+#relationship between expert label and NDAI image1
+expert_NDAI = data.frame(label = as.character(image1$expert_label), CORR = image1$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR image1")
+```
+
+```{r}
+#relationship between expert label and NDAI image2
+expert_NDAI = data.frame(label =  as.character(image2$expert_label), CORR = image2$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR image2")
+```
+```{r}
+#relationship between expert label and NDAI image2
+expert_NDAI = data.frame(label =  as.character(image3$expert_label), CORR = image3$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR image3")
+```
+```{r}
+#relationship between expert label and NDAI image2
+expert_NDAI = data.frame(label =  as.character(all$expert_label), CORR = all$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR All Data")
+```
+The boxplots for CORR based on different labels show that CORR is on average higher for pixels marked as cloud than as not cloud. CORR also has a higher variance for those marked as cloud.
+This conclusion contradicts to the statement in the paper that high correlations over cloud-free areas or low clouds are expected. This is because high correlations for clouds also occur under rare circumstances. More importantly, recklessly declare clear for high CORR
+
+Therefore, we also 
