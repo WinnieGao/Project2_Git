@@ -201,10 +201,25 @@ for (i in 1:length(x_index)) {
   upper_y = y_cut[y_index[i] + 1]
   train_val_data[train_val_data$x_coord >= lower_x & train_val_data$x_coord < upper_x & train_val_data$y_coord >= lower_y & train_val_data$y_coord < upper_y, "check"] = TRUE
 }
-test_val_data = train_val_data[!train_val_data$check, ]
+test_data = train_val_data[!train_val_data$check, ]
+test_data = within(test_data, rm(check))
 train_val_data = train_val_data[train_val_data$check, ]
+train_val_data = within(train_val_data, rm(check))
 
-#x_train_index = sample(train_val, 18, replace = FALSE)
+x_train_index = sample(train_val, 18, replace = FALSE)
+x_index = (x_train_index - 1) %/% 5 + 1
+y_index = (x_train_index - 1) %% 5 + 1
+train_data = train_val_data
+train_data$check = rep(FALSE, nrow(train_data))
+for (i in 1:length(x_index)) {
+  lower_x = x_cut[x_index[i]]
+  upper_x = x_cut[x_index[i] + 1]
+  lower_y = y_cut[y_index[i]]
+  upper_y = y_cut[y_index[i] + 1]
+  train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+}
+validation_data = train_data[!train_data$check, ]
+train_data = train_data[train_data$check, ]
 ```
 
 
