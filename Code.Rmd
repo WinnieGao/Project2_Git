@@ -20,7 +20,7 @@ colnames(image3) = c("y_coord", "x_coord", "expert_label", "NDAI", "SD", "CORR",
 all = rbind(image1, image2, image3)
 ```
 
-
+## Problem 1
 * 1(b)
 ```{r}
 nrow(image1)
@@ -174,5 +174,20 @@ ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)
 
 From the boxplots for NDAI based on different labels, we can clearly see that the NDAI is higher for cloud pixels than those cloud-free ones. The distrubition for pixels labeled as clouds are left skewed, while the distribution for cloud-free pixels are roughly symmetric. The distribution for three different image data are roughly the same as well.
 
+## Problem 2
+* 2(a)
+Since the three image data set represent the cloud dsitribution at different times at the same place. We decide not to combine all data into one. Since the data are not i.i.d., we cannot simply split the data by random. Our first method is, for each image data set, to divide all the data into 25 groups by cutting the image into 5*5 small images. For instance, data with y_coord from 2.0-78.2 and x_coord from 65.0-125.8 are in the same group. We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 25 groups, we use cross validation to generate 5 validation data.
+```{r}
+min_x = min(image1$x_coord)
+max_x = max(image1$x_coord)
+min_y = min(image1$y_coord)
+max_y = max(image1$y_coord)
+det_x = (max_x - min_x) / 5
+det_y = (max_y - min_y) / 5
+x_cut = seq(min_x, max_x + 1, det_x)
+y_cut = seq(min_y, max_y + 1, det_y)
+x_cut
+
+```
 
 
