@@ -184,10 +184,27 @@ min_y = min(image1$y_coord)
 max_y = max(image1$y_coord)
 det_x = (max_x - min_x) / 5
 det_y = (max_y - min_y) / 5
-x_cut = seq(min_x, max_x + 1, det_x)
-y_cut = seq(min_y, max_y + 1, det_y)
-x_cut
+x_cut = seq(min_x, max_x + 2, det_x)
+y_cut = seq(min_y, max_y + 2, det_y)
+x_cut[length(x_cut)] = x_cut[length(x_cut)] + 1
+y_cut[length(y_cut)] = y_cut[length(y_cut)] + 1
 
+train_val = sample(1:25, 23, replace = FALSE)
+x_index = (train_val - 1) %/% 5 + 1
+y_index = (train_val - 1) %% 5 + 1
+train_val_data = image1
+train_val_data$check = rep(FALSE, nrow(train_val_data))
+for (i in 1:length(x_index)) {
+  lower_x = x_cut[x_index[i]]
+  upper_x = x_cut[x_index[i] + 1]
+  lower_y = y_cut[y_index[i]]
+  upper_y = y_cut[y_index[i] + 1]
+  train_val_data[train_val_data$x_coord >= lower_x & train_val_data$x_coord < upper_x & train_val_data$y_coord >= lower_y & train_val_data$y_coord < upper_y, "check"] = TRUE
+}
+test_val_data = train_val_data[!train_val_data$check, ]
+train_val_data = train_val_data[train_val_data$check, ]
+
+#x_train_index = sample(train_val, 18, replace = FALSE)
 ```
 
 
