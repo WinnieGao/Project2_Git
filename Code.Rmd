@@ -172,7 +172,7 @@ expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
 ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI All Data")
 ```
 
-From the boxplots for NDAI based on different labels, we can clearly see that the NDAI is higher for cloud pixels than those cloud-free ones. The distrubition for pixels labeled as clouds are left skewed, while the distribution for cloud-free pixels are roughly symmetric. The distribution for three different image data are roughly the same as well.
+From the boxplots for NDAI based on different labels, we can clearly see that the NDAI is higher for cloud pixels than those cloud-free ones. The distrubition for cloud-free pixels are left skewed, while the distribution for pixels marked as cloud are roughly symmetric. The distribution for three different image data are roughly the same as well.
 
 ## Problem 2
 * 2(a)
@@ -222,4 +222,9 @@ validation_data = train_data[!train_data$check, ]
 train_data = train_data[train_data$check, ]
 ```
 
+```{r}
+sum(test_data$expert_label == -1) / nrow(test_data)
+sum(validation_data$expert_label == -1) / nrow(validation_data)
+```
+Setting all labels ti -1, the accuracy for test data is 0.377 and that for validation data is 0.386, which is relatively low. If the test data and validation data contain mostly -1, the trivial classifier will have a high average accuracy.
 
