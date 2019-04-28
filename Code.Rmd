@@ -176,8 +176,54 @@ From the boxplots for NDAI based on different labels, we can clearly see that th
 
 ## Problem 2
 * 2(a)
-Even though the three image data set represent the cloud dsitribution at different times at the same place, we still decide to combine the data into one to have more data for training. We also clear out the unlabeled data here because they are not helpful enough for classification problem. Since the data are not i.i.d., we cannot simply split the data by random. Our first method is, for each image data set, to divide all the data into 25 groups by cutting the image into 5*5 small images. For instance, data with y_coord from 2.0-78.2 and x_coord from 65.0-125.8 are in the same group. We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like stratified sampling. Every time we sample a group wihout replacement and include all data points in that group. We can also see this method as combining small pixels into a much larger one in a visual way. This method can guarantee pixels that have high correlations (adjacent pixels) can be sampled at the same time (except those on the boundary). And the random sampling on the 25 groups can make sure that we are not too sticking to the patterns for the training data so that overfitting can be somewhat prevented. 
+Even though the three image data set represent the cloud dsitribution at different times at the same place, we still decide to combine the data into one to have more data for training. We also clear out the unlabeled data here because they are not helpful enough for classification problem. Since the data are not i.i.d., we cannot simply split the data by random. 
+
+First method:
+We decided to divide the data into 25 groups by cutting the image horizontally. In this case, data with y_coord from 2.0-78.2 and the corresponding x-coordinate are in the same group.  We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like a one-stage cluster sampling. Every time we sample a group wihout replacement and include all data points in that group. Data in the same groups tend to be correlated to each other, which fit the property of the non i.i.d. data.
+
 ```{r}
+set.seed(100)
+all_clear = all[all$expert_label != 0, ]
+min_y = min(all_clear$y_coord)
+max_y = max(all_clear$y_coord)
+det_y = (max_y - min_y) / 25
+y_cut = seq(min_y, max_y + 2, det_y)
+y_cut[length(y_cut)] = y_cut[length(y_cut)] + 1
+
+train_val = sample(1:25, 23, replace = FALSE)
+y_index = (train_val - 1) %% 5 + 1
+
+train_val_data = all_clear
+train_val_data$check = rep(FALSE, nrow(train_val_data))
+for (i in 1:length(x_index)) {
+  lower_y = y_cut[y_index[i]]
+  upper_y = y_cut[y_index[i] + 1]
+  train_val_data[train_val_data$y_coord >= lower_y & train_val_data$y_coord < upper_y, "check"] = TRUE
+}
+
+test_data = train_val_data[!train_val_data$check, ]
+test_data = within(test_data, rm(check))
+
+train_val_data = train_val_data[train_val_data$check, ]
+train_val_data = within(train_val_data, rm(check))
+
+y_train_index = sample(train_val, 18, replace = FALSE)
+y_index = (y_train_index - 1) %% 5 + 1
+train_data = train_val_data
+train_data$check = rep(FALSE, nrow(train_data))
+for (i in 1:length(y_index)) {
+  lower_y = y_cut[y_index[i]]
+  upper_y = y_cut[y_index[i] + 1]
+  train_data[train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+}
+validation_data = train_data[!train_data$check, ]
+train_data = train_data[train_data$check, ]
+```
+
+
+Our Second method is, for each image data set, to divide all the data into 25 groups by cutting the image into 5*5 small images. For instance, data with y_coord from 2.0-78.2 and x_coord from 65.0-125.8 are in the same group. We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like stratified sampling. Every time we sample a group wihout replacement and include all data points in that group. We can also see this method as combining small pixels into a much larger one in a visual way. This method can guarantee pixels that have high correlations (adjacent pixels) can be sampled at the same time (except those on the boundary). And the random sampling on the 25 groups can make sure that we are not too sticking to the patterns for the training data so that overfitting can be somewhat prevented. 
+```{r}
+set.seed(100)
 all_clear = all[all$expert_label != 0, ]
 min_x = min(all_clear$x_coord)
 max_x = max(all_clear$x_coord)
@@ -193,7 +239,7 @@ y_cut[length(y_cut)] = y_cut[length(y_cut)] + 1
 train_val = sample(1:25, 23, replace = FALSE)
 x_index = (train_val - 1) %/% 5 + 1
 y_index = (train_val - 1) %% 5 + 1
-train_val_data = image1
+train_val_data = all_clear
 train_val_data$check = rep(FALSE, nrow(train_val_data))
 for (i in 1:length(x_index)) {
   lower_x = x_cut[x_index[i]]
@@ -223,16 +269,19 @@ validation_data = train_data[!train_data$check, ]
 train_data = train_data[train_data$check, ]
 ```
 
+
+
 * 2(b)
 ```{r}
 sum(test_data$expert_label == -1) / nrow(test_data)
 sum(validation_data$expert_label == -1) / nrow(validation_data)
 ```
-Setting all labels to -1, the accuracy for test data is 0.895 and that for validation data is 0.435, which are relatively low. If the test data and validation data contain mostly -1, the trivial classifier will have a high average accuracy.
+Setting all labels to -1, the accuracy for test data is 0.306 and that for validation data is 0.698, which are relatively low. If the test data and validation data contain mostly -1, the trivial classifier will have a high average accuracy.
 
 * 2(c)
 ```{r}
 library(ggbiplot)
+library(corrplot)
 image1_clear = image1[image1$expert_label != 0,]
 pca_prcomp<- prcomp(image1_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
 loadings = pca_prcomp$rotation
@@ -241,7 +290,13 @@ ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
 ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
   geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
   ggtitle("loadings")
+
+x <- cor(image1_clear)
+corrplot.mixed(x, lower.col = "black", number.cex = 0.7)
 ```
+
+
+
 ```{r}
 image2_clear = image2[image2$expert_label != 0,]
 pca_prcomp<- prcomp(image2_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
@@ -251,9 +306,13 @@ ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
 ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
   geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
   ggtitle("loadings")
+
+x <- cor(image2_clear)
+corrplot.mixed(x, lower.col = "black", number.cex = 0.7)
 ```
 
 ```{r}
+image3_clear = image3[image3$expert_label != 0,]
 pca_prcomp<- prcomp(image3[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
 loadings = pca_prcomp$rotation
 cor(image3[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image3$expert_label)
@@ -261,16 +320,17 @@ ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
 ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
   geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
   ggtitle("loadings")
+
+x <- cor(image3_clear)
+corrplot.mixed(x, lower.col = "black", number.cex = 0.7)
 ```
 
-```{r}
-pca_prcomp<- prcomp(all[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
-loadings = pca_prcomp$rotation
-cor(all[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], all$expert_label)
-ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
-ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
-  geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
-  ggtitle("loadings")
-```
 To find three best features, we first caculate the correlation between those features and the expert labels. The magnitude of the absolute values of the correlations represent how close the relationships are between features and expert labels. Larger correlation value means better features. We found that NDAI and CORR are better than others on average. 
-Then, we plot biplots and loadings on first two PCs to see how much each feature contributes to these PCs. We choose to use two PCs because they capture almost 90% of the data which is enough to represent the entire data set. The loading plots can illustrate the association between features and PCs. The larger the loading of a feature in a given PC, the more associated the feature is with that PC. After viewing the four loading plots, we observe that SD and DF have larger loadings than other features (expect NDAI and CORR). Considering there are other reasons that is more associated with scientific explanation, we decide to be consistent with the three features chosen in the paper, which are CORR, NDAI and SD.
+Then, we plot biplots and loadings on first two PCs to see how much each feature contributes to these PCs. We choose to use two PCs because they capture almost 90% of the data which is enough to represent the entire data set. The loading plots can illustrate the association between features and PCs. The larger the loading of a feature in a given PC, the more associated the feature is with that PC. After viewing the four loading plots, we observe that SD and DF have larger loadings than other features (expect NDAI and CORR). We allow draw the correlation plot, 
+Considering there are other reasons that is more associated with scientific explanation, we decide to be consistent with the three features chosen in the paper, which are CORR, NDAI and SD.
+
+
+
+
+
+
