@@ -329,6 +329,55 @@ To find three best features, we first caculate the correlation between those fea
 Then, we plot biplots and loadings on first two PCs to see how much each feature contributes to these PCs. We choose to use two PCs because they capture almost 90% of the data which is enough to represent the entire data set. The loading plots can illustrate the association between features and PCs. The larger the loading of a feature in a given PC, the more associated the feature is with that PC. After viewing the four loading plots, we observe that SD and DF have larger loadings than other features (expect NDAI and CORR). We allow draw the correlation plot, 
 Considering there are other reasons that is more associated with scientific explanation, we decide to be consistent with the three features chosen in the paper, which are CORR, NDAI and SD.
 
+* 2(d)
+```{r}
+CVgeneric <- function(classifier, training_feature, training_label, K, loss_function) {
+  bin = matrix(list(), nrow = 1, ncol = K)
+  print(bin)
+  for (i in 1:23) {
+    bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
+  }
+  error = c()
+  train_data = train_val_data
+  train_data$check = rep(FALSE, nrow(train_data))
+  for (i in 1:K) {
+    CV_val = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
+    CV_train = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
+    for (j in bin[i]) {
+      x_index = (j - 1) %/% 5 + 1
+      y_index = (j - 1) %% 5 + 1
+      for (k in 1:length(x_index)) {
+        lower_x = x_cut[x_index[k]]
+        upper_x = x_cut[x_index[k] + 1]
+        lower_y = y_cut[y_index[k]]
+        upper_y = y_cut[y_index[k] + 1]
+        train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+      }
+    }
+    CV_val = train_data[!train_data$check, ]
+    CV_train = train_data[train_data$check, ]
+    currFormula = as.formula(paste(training_label, "~", 
+                                 paste(training_feature, collapse = "+"), sep = ""))
+    model = classifier(currFormula, data = CV_train)
+    y_prob = predict(model, CV_val, type = "response")
+    y = CV_val[, training_label]
+    y_hat = rep(-1, length(y_prob))
+    y_hat[y_prob > 0.5] = 1
+    error = loss_function(y_hat, y)
+  }
+  return(error)
+}
+```
+
+## Problem 3
+3(a)
+```{r}
+loss_function <- function(y_hat, y) {
+  return(sum((y_hat - y) ^ 2) / length(y))
+}
+CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, loss_function)
+```
+
 
 
 
