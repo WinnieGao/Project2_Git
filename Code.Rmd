@@ -384,9 +384,8 @@ CVgeneric <- function(classifier, training_feature, training_label, K, loss_func
       error = c(error, loss_function(knn.pred, CV_val[, training_label]))
     }
     if (identical(classifier, svm)) {
-      model = classifier(currFormula, data = CV_train)
+      model = classifier(currFormula, data = CV_train, type = "C-classification", kernel = "linear", cost = 1)
       y_hat = predict(model, CV_val)
-      print(y_hat)
       y = CV_val[, training_label]
       error = c(error, loss_function(y_hat, y))
     }
@@ -416,7 +415,13 @@ qda_accuracy_avg = mean(qda_accuracy)
 knn_accuracy = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
 knn_accuracy_avg = mean(knn_accuracy)
 
-CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+svm_accuracy = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+svm_accuracy_avg = mean(svm_accuracy)
+
+model_accuracy = data.frame(glm = glm_accuracy, lda = lda_accuracy, qda = qda_accuracy, knn = knn_accuracy, svm = svm_accuracy)
+model_accuracy = rbind(model_accuracy, c(glm_accuracy_avg, lda_accuracy_avg, qda_accuracy_avg, knn_accuracy_avg, svm_accuracy_avg))
+rownames(model_accuracy) = c(seq(1, 8), "average")
+model_accuracy
 ```
 
 
