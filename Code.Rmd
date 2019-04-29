@@ -331,7 +331,7 @@ Considering there are other reasons that is more associated with scientific expl
 
 * 2(d)
 ```{r}
-CVgeneric <- function(classifier, training_feature, training_label, K, loss_function) {
+CVgeneric <- function(classifier, training_feature, training_label, K, loss_function, method) {
   bin = matrix(list(), nrow = 1, ncol = K)
   for (i in 1:23) {
     bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
@@ -343,16 +343,25 @@ CVgeneric <- function(classifier, training_feature, training_label, K, loss_func
     CV_val = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
     CV_train = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
     for (j in bin[i]) {
-      x_index = (j - 1) %/% 5 + 1
-      y_index = (j - 1) %% 5 + 1
-      for (k in 1:length(x_index)) {
-        lower_x = x_cut[x_index[k]]
-        upper_x = x_cut[x_index[k] + 1]
-        lower_y = y_cut[y_index[k]]
-        upper_y = y_cut[y_index[k] + 1]
-        train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+      if (method == 2) {
+        x_index = (j - 1) %/% 5 + 1
+        y_index = (j - 1) %% 5 + 1
+        for (k in 1:length(x_index)) {
+          lower_x = x_cut[x_index[k]]
+          upper_x = x_cut[x_index[k] + 1]
+          lower_y = y_cut[y_index[k]]
+          upper_y = y_cut[y_index[k] + 1]
+          train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+        } else {
+          y_index = (train_val - 1) %% 5 + 1
+          for (i in 1:length(y_index)) {
+            lower_y = y_cut[y_index[i]]
+            upper_y = y_cut[y_index[i] + 1]
+            train_data[train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+          }
+        }
       }
-    }
+    }  
     CV_val = train_data[!train_data$check, ]
     CV_train = train_data[train_data$check, ]
     currFormula = as.formula(paste(training_label, "~", 
@@ -405,23 +414,45 @@ accuracy <- function(y_hat, y) {
 }
 glm_accuracy = CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
 glm_accuracy_avg = mean(glm_accuracy)
+model_glm = glm(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_glm, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = rep(-1, length(y_prob))
+y_hat[y_prob > 0.5] = 1
+test_accuracy_glm = accuracy(y_hat, y)
 
 lda_accuracy = CVgeneric(lda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
 lda_accuracy_avg = mean(lda_accuracy)
+model_lda = lda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_lda, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_accuracy_lda = accuracy(y_hat, y)
 
 qda_accuracy = CVgeneric(qda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
 qda_accuracy_avg = mean(qda_accuracy)
+model_qda = qda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_qda, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_accuracy_qda = accuracy(y_hat, y)
 
 knn_accuracy = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
 knn_accuracy_avg = mean(knn_accuracy)
+knn.pred = knn(train_val_data[, c("NDAI", "SD", "CORR")], test_data[, c("NDAI", "SD", "CORR")], train_val_data[, "expert_label"], k = 3)
+test_accuracy_knn = accuracy(knn.pred, test_data[, "expert_label"])
 
-svm_accuracy = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+svm_accuracy = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 2)
 svm_accuracy_avg = mean(svm_accuracy)
+model_svm = svm(expert_label ~ NDAI + SD + CORR, data = train_val_data, type = "C-classification", kernel = "linear", cost = 1)
+y_hat = predict(model_svm, test_data)
+y = test_data[, "expert_label"]
+test_accuracy_svm = accuracy(y_hat, y)
 
 model_accuracy = data.frame(glm = glm_accuracy, lda = lda_accuracy, qda = qda_accuracy, knn = knn_accuracy, svm = svm_accuracy)
 model_accuracy = rbind(model_accuracy, c(glm_accuracy_avg, lda_accuracy_avg, qda_accuracy_avg, knn_accuracy_avg, svm_accuracy_avg))
 rownames(model_accuracy) = c(seq(1, 8), "average")
-model_accuracy
+test_accuracy = data.frame(glm = test_accuracy_glm, lda = test_accuracy_lda, qda = test_accuracy_qda, knn = test_accuracy_knn, svm = test_accuracy_svm)
 ```
 
 
