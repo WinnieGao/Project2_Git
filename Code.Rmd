@@ -333,7 +333,6 @@ Considering there are other reasons that is more associated with scientific expl
 ```{r}
 CVgeneric <- function(classifier, training_feature, training_label, K, loss_function) {
   bin = matrix(list(), nrow = 1, ncol = K)
-  print(bin)
   for (i in 1:23) {
     bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
   }
@@ -358,12 +357,39 @@ CVgeneric <- function(classifier, training_feature, training_label, K, loss_func
     CV_train = train_data[train_data$check, ]
     currFormula = as.formula(paste(training_label, "~", 
                                  paste(training_feature, collapse = "+"), sep = ""))
-    model = classifier(currFormula, data = CV_train)
-    y_prob = predict(model, CV_val, type = "response")
-    y = CV_val[, training_label]
-    y_hat = rep(-1, length(y_prob))
-    y_hat[y_prob > 0.5] = 1
-    error = loss_function(y_hat, y)
+    if (identical(classifier, glm)) {
+      model = classifier(currFormula, data = CV_train)
+      y_prob = predict(model, CV_val, type = "response")
+      y = CV_val[, training_label]
+      y_hat = rep(-1, length(y_prob))
+      y_hat[y_prob > 0.5] = 1
+      error = c(error, loss_function(y_hat, y))
+    }
+    if (identical(classifier, lda)) {
+      model = classifier(currFormula, data = CV_train)
+      y_prob = predict(model, CV_val)
+      y = CV_val[, training_label]
+      y_hat = y_prob$class
+      error = c(error, loss_function(y_hat, y))
+    }
+    if (identical(classifier, qda)) {
+      model = classifier(currFormula, data = CV_train)
+      y_prob = predict(model, CV_val)
+      y = CV_val[, training_label]
+      y_hat = y_prob$class
+      error = c(error, loss_function(y_hat, y))
+    }
+    if (identical(classifier, knn)) {
+      knn.pred = classifier(CV_train[, training_feature], CV_val[, training_feature], CV_train[, training_label], k = 3)
+      error = c(error, loss_function(knn.pred, CV_val[, training_label]))
+    }
+    if (identical(classifier, svm)) {
+      model = classifier(currFormula, data = CV_train)
+      y_hat = predict(model, CV_val)
+      print(y_hat)
+      y = CV_val[, training_label]
+      error = c(error, loss_function(y_hat, y))
+    }
   }
   return(error)
 }
@@ -372,10 +398,25 @@ CVgeneric <- function(classifier, training_feature, training_label, K, loss_func
 ## Problem 3
 3(a)
 ```{r}
-loss_function <- function(y_hat, y) {
-  return(sum((y_hat - y) ^ 2) / length(y))
+library(MASS)
+library(class)
+library(e1071)
+accuracy <- function(y_hat, y) {
+  return(mean(y_hat == y))
 }
-CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, loss_function)
+glm_accuracy = CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+glm_accuracy_avg = mean(glm_accuracy)
+
+lda_accuracy = CVgeneric(lda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+lda_accuracy_avg = mean(lda_accuracy)
+
+qda_accuracy = CVgeneric(qda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+qda_accuracy_avg = mean(qda_accuracy)
+
+knn_accuracy = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+knn_accuracy_avg = mean(knn_accuracy)
+
+CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
 ```
 
 
