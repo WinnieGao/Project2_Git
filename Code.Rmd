@@ -191,11 +191,11 @@ y_cut = seq(min_y, max_y + 2, det_y)
 y_cut[length(y_cut)] = y_cut[length(y_cut)] + 1
 
 train_val = sample(1:25, 23, replace = FALSE)
-y_index = (train_val - 1) %% 5 + 1
+y_index = (train_val - 1) %% 25 + 1
 
 train_val_data = all_clear
 train_val_data$check = rep(FALSE, nrow(train_val_data))
-for (i in 1:length(x_index)) {
+for (i in 1:length(y_index)) {
   lower_y = y_cut[y_index[i]]
   upper_y = y_cut[y_index[i] + 1]
   train_val_data[train_val_data$y_coord >= lower_y & train_val_data$y_coord < upper_y, "check"] = TRUE
@@ -203,12 +203,11 @@ for (i in 1:length(x_index)) {
 
 test_data = train_val_data[!train_val_data$check, ]
 test_data = within(test_data, rm(check))
-
 train_val_data = train_val_data[train_val_data$check, ]
 train_val_data = within(train_val_data, rm(check))
 
 y_train_index = sample(train_val, 18, replace = FALSE)
-y_index = (y_train_index - 1) %% 5 + 1
+y_index = (y_train_index - 1) %/% 25 + 1
 train_data = train_val_data
 train_data$check = rep(FALSE, nrow(train_data))
 for (i in 1:length(y_index)) {
@@ -286,13 +285,13 @@ image1_clear = image1[image1$expert_label != 0,]
 pca_prcomp<- prcomp(image1_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
 loadings = pca_prcomp$rotation
 cor(image1_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image1_clear$expert_label)
-ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0) + ggtitle("biplot for image 1")
 ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
   geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
-  ggtitle("loadings")
+  ggtitle("loadings for image 1")
 
 x <- cor(image1_clear)
-corrplot.mixed(x, lower.col = "black", number.cex = 0.7)
+corrplot.mixed(x, lower.col = "black", number.cex = 0.6, title = "corrplot for image 1")
 ```
 
 
@@ -302,13 +301,13 @@ image2_clear = image2[image2$expert_label != 0,]
 pca_prcomp<- prcomp(image2_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
 loadings = pca_prcomp$rotation
 cor(image2_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image2_clear$expert_label)
-ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0) + ggtitle("biplot for image 2")
 ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
   geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
-  ggtitle("loadings")
+  ggtitle("loadings for image 2")
 
 x <- cor(image2_clear)
-corrplot.mixed(x, lower.col = "black", number.cex = 0.7)
+corrplot.mixed(x, lower.col = "black", number.cex = 0.6, title = "corrplot for image 2")
 ```
 
 ```{r}
@@ -340,8 +339,6 @@ CVgeneric <- function(classifier, training_feature, training_label, K, loss_func
   train_data = train_val_data
   train_data$check = rep(FALSE, nrow(train_data))
   for (i in 1:K) {
-    CV_val = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
-    CV_train = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
     for (j in bin[i]) {
       if (method == 2) {
         x_index = (j - 1) %/% 5 + 1
@@ -352,16 +349,16 @@ CVgeneric <- function(classifier, training_feature, training_label, K, loss_func
           lower_y = y_cut[y_index[k]]
           upper_y = y_cut[y_index[k] + 1]
           train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
-        } else {
-          y_index = (train_val - 1) %% 5 + 1
-          for (i in 1:length(y_index)) {
-            lower_y = y_cut[y_index[i]]
-            upper_y = y_cut[y_index[i] + 1]
+        }
+       }else {
+          y_index = j
+          for (k in 1:length(y_index)) {
+            lower_y = y_cut[y_index[k]]
+            upper_y = y_cut[y_index[k] + 1]
             train_data[train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
           }
         }
-      }
-    }  
+     }
     CV_val = train_data[!train_data$check, ]
     CV_train = train_data[train_data$check, ]
     currFormula = as.formula(paste(training_label, "~", 
@@ -412,47 +409,51 @@ library(e1071)
 accuracy <- function(y_hat, y) {
   return(mean(y_hat == y))
 }
-glm_accuracy = CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+glm_accuracy = CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 1)
 glm_accuracy_avg = mean(glm_accuracy)
 model_glm = glm(expert_label ~ NDAI + SD + CORR, data = train_val_data)
-y_prob = predict(model_glm, test_data, type = "response")
+y_prob_glm = predict(model_glm, test_data, type = "response")
 y = test_data[, "expert_label"]
-y_hat = rep(-1, length(y_prob))
-y_hat[y_prob > 0.5] = 1
-test_accuracy_glm = accuracy(y_hat, y)
+y_hat_glm = rep(-1, length(y_prob_glm))
+y_hat_glm[y_prob_glm > 0.5] = 1
+test_accuracy_glm = accuracy(y_hat_glm, y)
 
-lda_accuracy = CVgeneric(lda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+
+lda_accuracy = CVgeneric(lda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 1)
 lda_accuracy_avg = mean(lda_accuracy)
 model_lda = lda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
-y_prob = predict(model_lda, test_data, type = "response")
+y_prob_lda = predict(model_lda, test_data, type = "response")
 y = test_data[, "expert_label"]
-y_hat = y_prob$class
-test_accuracy_lda = accuracy(y_hat, y)
+y_hat_lda = y_prob_lda$class
+test_accuracy_lda = accuracy(y_hat_lda, y)
 
-qda_accuracy = CVgeneric(qda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+qda_accuracy = CVgeneric(qda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 1)
 qda_accuracy_avg = mean(qda_accuracy)
 model_qda = qda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
-y_prob = predict(model_qda, test_data, type = "response")
+y_prob_qda = predict(model_qda, test_data, type = "response")
 y = test_data[, "expert_label"]
-y_hat = y_prob$class
-test_accuracy_qda = accuracy(y_hat, y)
+y_hat_qda = y_prob_qda$class
+test_accuracy_qda = accuracy(y_hat_qda, y)
 
-knn_accuracy = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+knn_accuracy = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 1)
 knn_accuracy_avg = mean(knn_accuracy)
 knn.pred = knn(train_val_data[, c("NDAI", "SD", "CORR")], test_data[, c("NDAI", "SD", "CORR")], train_val_data[, "expert_label"], k = 3)
 test_accuracy_knn = accuracy(knn.pred, test_data[, "expert_label"])
 
-svm_accuracy = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 2)
+svm_accuracy = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 1)
 svm_accuracy_avg = mean(svm_accuracy)
 model_svm = svm(expert_label ~ NDAI + SD + CORR, data = train_val_data, type = "C-classification", kernel = "linear", cost = 1)
-y_hat = predict(model_svm, test_data)
+y_hat_svm = predict(model_svm, test_data)
 y = test_data[, "expert_label"]
-test_accuracy_svm = accuracy(y_hat, y)
+test_accuracy_svm = accuracy(y_hat_svm, y)
 
 model_accuracy = data.frame(glm = glm_accuracy, lda = lda_accuracy, qda = qda_accuracy, knn = knn_accuracy, svm = svm_accuracy)
 model_accuracy = rbind(model_accuracy, c(glm_accuracy_avg, lda_accuracy_avg, qda_accuracy_avg, knn_accuracy_avg, svm_accuracy_avg))
 rownames(model_accuracy) = c(seq(1, 8), "average")
+model_accuracy
+
 test_accuracy = data.frame(glm = test_accuracy_glm, lda = test_accuracy_lda, qda = test_accuracy_qda, knn = test_accuracy_knn, svm = test_accuracy_svm)
+test_accuracy
 ```
 
 
