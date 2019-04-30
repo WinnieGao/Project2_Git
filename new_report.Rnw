@@ -162,7 +162,7 @@ We used cross-validation with 8 folds to train the models, and get the accuracie
 
 For our first splitting method,....
 
-For the second one, the cross-validation average accuracies demonstrate that QDA have the best performance on validation data. QDA has a high accuracy on test data, but LDA performs better. GLM has lowest average cross-validation accuracy on validation set and svm performs worst on test data. Considering both average validation set accuracy and test set accuracy, we believe that QDA is the best model for the second splitting method.
+For the second one, the cross-validation average accuracies demonstrate that QDA have the best performance on validation data. QDA has a high accuracy on test data, but LDA performs better. GLM has lowest average cross-validation accuracy on validation set and svm performs worst on test data. Considering both average validation set accuracies and test set accuracies, we believe that QDA is the best model for the second splitting method.
 
 \includegraphics[width = 13.5cm]{3(a)2-1}
 
