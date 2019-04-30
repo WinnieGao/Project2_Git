@@ -315,10 +315,10 @@ image3_clear = image3[image3$expert_label != 0,]
 pca_prcomp<- prcomp(image3[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
 loadings = pca_prcomp$rotation
 cor(image3[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image3$expert_label)
-ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)+ ggtitle("biplot for image 3")
 ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
   geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
-  ggtitle("loadings")
+  ggtitle("loadings for image 3")
 
 x <- cor(image3_clear)
 corrplot.mixed(x, lower.col = "black", number.cex = 0.7)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  29 APR 2019 20:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 APR 2019 10:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -878,25 +878,42 @@ File: 2(c)image3.png Graphic file (type png)
 <use 2(c)image3.png>
 Package pdftex.def Info: 2(c)image3.png  used on input line 127.
 (pdftex.def)             Requested size: 156.49014pt x 95.31158pt.
- [5 <./2(c)image1.png> <./2(c)image2.png> <./2(c)image3.png>] (./new_report.aux
-) ) 
+<2(c)pca1.png, id=64, 826.08624pt x 350.30875pt>
+File: 2(c)pca1.png Graphic file (type png)
+<use 2(c)pca1.png>
+Package pdftex.def Info: 2(c)pca1.png  used on input line 132.
+(pdftex.def)             Requested size: 384.1122pt x 162.88654pt.
+<2(c)pca2.png, id=65, 906.38625pt x 331.2375pt>
+File: 2(c)pca2.png Graphic file (type png)
+<use 2(c)pca2.png>
+Package pdftex.def Info: 2(c)pca2.png  used on input line 134.
+(pdftex.def)             Requested size: 384.1122pt x 140.37225pt.
+<2(c)pca3.png, id=66, 841.1425pt x 345.29pt>
+File: 2(c)pca3.png Graphic file (type png)
+<use 2(c)pca3.png>
+Package pdftex.def Info: 2(c)pca3.png  used on input line 136.
+(pdftex.def)             Requested size: 384.1122pt x 157.67621pt.
+ [5 <./2(c)image1.png> <./2(c)image2.png> <./2(c)image3.png> <./2(c)pca1.png> <
+./2(c)pca2.png> <./2(c)pca3.png>]
+(./new_report.aux) ) 
 Here is how much of TeX's memory you used:
- 13921 strings out of 492649
- 263403 string characters out of 6129622
+ 13936 strings out of 492649
+ 263640 string characters out of 6129622
  311025 words of memory out of 5000000
- 17483 multiletter control sequences out of 15000+600000
+ 17495 multiletter control sequences out of 15000+600000
  25424 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  54i,6n,73p,978b,203s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
-b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
-sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on new_report.pdf (5 pages, 3643383 bytes).
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr17.pfb>
+Output written on new_report.pdf (5 pages, 4027610 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
+ 93 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 122 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 
