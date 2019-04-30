@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 APR 2019 10:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 APR 2019 11:32
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **new_report.tex
 (./new_report.tex
@@ -425,6 +425,10 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen159
 \Gm@dimlist=\toks36
 )
+(/usr/local/texlive/2018/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/Sweave.sty
 Package: Sweave 
 
@@ -624,24 +628,24 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )))) (./new_report.aux)
 \openout1 = `new_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 15.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    ... okay on input line 15.
 
 ABD: EveryShipout initializing macros
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -744,12 +748,12 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 (./new_report-concordance.tex)
-LaTeX Font Info:    Try loading font information for U+msa on input line 17.
+LaTeX Font Info:    Try loading font information for U+msa on input line 18.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 17.
+LaTeX Font Info:    Try loading font information for U+msb on input line 18.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -757,20 +761,20 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <1(b)image1.png, id=5, 854.19125pt x 534.99875pt>
 File: 1(b)image1.png Graphic file (type png)
 <use 1(b)image1.png>
-Package pdftex.def Info: 1(b)image1.png  used on input line 42.
+Package pdftex.def Info: 1(b)image1.png  used on input line 43.
 (pdftex.def)             Requested size: 170.71652pt x 106.91621pt.
 <1(b)image2.png, id=7, 857.2025pt x 537.00626pt>
 File: 1(b)image2.png Graphic file (type png)
 <use 1(b)image2.png>
-Package pdftex.def Info: 1(b)image2.png  used on input line 43.
+Package pdftex.def Info: 1(b)image2.png  used on input line 44.
 (pdftex.def)             Requested size: 170.71652pt x 106.94867pt.
 <1(b)image3.png, id=8, 860.21375pt x 539.01375pt>
 File: 1(b)image3.png Graphic file (type png)
 <use 1(b)image3.png>
-Package pdftex.def Info: 1(b)image3.png  used on input line 44.
+Package pdftex.def Info: 1(b)image3.png  used on input line 45.
 (pdftex.def)             Requested size: 170.71652pt x 106.97014pt.
 
-Overfull \hbox (20.89384pt too wide) in paragraph at lines 42--45
+Overfull \hbox (20.89384pt too wide) in paragraph at lines 43--46
 [][] [] [] 
  []
 
@@ -780,42 +784,42 @@ Overfull \hbox (20.89384pt too wide) in paragraph at lines 42--45
 <1(c)image1.png, id=19, 832.10875pt x 520.94624pt>
 File: 1(c)image1.png Graphic file (type png)
 <use 1(c)image1.png>
-Package pdftex.def Info: 1(c)image1.png  used on input line 55.
+Package pdftex.def Info: 1(c)image1.png  used on input line 56.
 (pdftex.def)             Requested size: 170.71652pt x 106.87416pt.
 <1(c)image2.png, id=20, 826.08624pt x 502.87875pt>
 File: 1(c)image2.png Graphic file (type png)
 <use 1(c)image2.png>
-Package pdftex.def Info: 1(c)image2.png  used on input line 56.
+Package pdftex.def Info: 1(c)image2.png  used on input line 57.
 (pdftex.def)             Requested size: 170.71652pt x 103.91953pt.
 <1(c)image3.png, id=21, 834.11626pt x 502.87875pt>
 File: 1(c)image3.png Graphic file (type png)
 <use 1(c)image3.png>
-Package pdftex.def Info: 1(c)image3.png  used on input line 57.
+Package pdftex.def Info: 1(c)image3.png  used on input line 58.
 (pdftex.def)             Requested size: 170.71652pt x 102.922pt.
 
-Overfull \hbox (20.89384pt too wide) in paragraph at lines 55--58
+Overfull \hbox (20.89384pt too wide) in paragraph at lines 56--59
 [][] [] [] 
  []
 
 <1(c)image4.png, id=22, 848.16875pt x 529.98pt>
 File: 1(c)image4.png Graphic file (type png)
 <use 1(c)image4.png>
-Package pdftex.def Info: 1(c)image4.png  used on input line 65.
+Package pdftex.def Info: 1(c)image4.png  used on input line 66.
 (pdftex.def)             Requested size: 213.39566pt x 133.3357pt.
 <1(c)image5.png, id=23, 851.18pt x 528.97626pt>
 File: 1(c)image5.png Graphic file (type png)
 <use 1(c)image5.png>
-Package pdftex.def Info: 1(c)image5.png  used on input line 66.
+Package pdftex.def Info: 1(c)image5.png  used on input line 67.
 (pdftex.def)             Requested size: 213.39566pt x 132.61502pt.
 <1(c)image6.png, id=24, 855.195pt x 533.995pt>
 File: 1(c)image6.png Graphic file (type png)
 <use 1(c)image6.png>
-Package pdftex.def Info: 1(c)image6.png  used on input line 68.
+Package pdftex.def Info: 1(c)image6.png  used on input line 69.
 (pdftex.def)             Requested size: 213.39566pt x 133.24582pt.
 <1(c)image7.png, id=25, 839.135pt x 525.965pt>
 File: 1(c)image7.png Graphic file (type png)
 <use 1(c)image7.png>
-Package pdftex.def Info: 1(c)image7.png  used on input line 69.
+Package pdftex.def Info: 1(c)image7.png  used on input line 70.
 (pdftex.def)             Requested size: 213.39566pt x 133.75414pt.
 [2 <./1(b)image1.png> <./1(b)image2.png> <./1(b)image3.png> <./1(c)image1.png> 
 <./1(c)image2.png> <./1(c)image3.png> <./1(c)image4.png> <./1(c)image5.png> <./
@@ -823,42 +827,42 @@ Package pdftex.def Info: 1(c)image7.png  used on input line 69.
 <1(c)image8.png, id=39, 860.21375pt x 529.98pt>
 File: 1(c)image8.png Graphic file (type png)
 <use 1(c)image8.png>
-Package pdftex.def Info: 1(c)image8.png  used on input line 80.
+Package pdftex.def Info: 1(c)image8.png  used on input line 81.
 (pdftex.def)             Requested size: 213.39566pt x 131.46764pt.
 <1(c)image9.png, id=40, 847.165pt x 519.9425pt>
 File: 1(c)image9.png Graphic file (type png)
 <use 1(c)image9.png>
-Package pdftex.def Info: 1(c)image9.png  used on input line 81.
+Package pdftex.def Info: 1(c)image9.png  used on input line 82.
 (pdftex.def)             Requested size: 213.39566pt x 130.96907pt.
 <1(c)image10.png, id=41, 865.2325pt x 523.9575pt>
 File: 1(c)image10.png Graphic file (type png)
 <use 1(c)image10.png>
-Package pdftex.def Info: 1(c)image10.png  used on input line 83.
+Package pdftex.def Info: 1(c)image10.png  used on input line 84.
 (pdftex.def)             Requested size: 213.39566pt x 129.22217pt.
 <1(c)image11.png, id=42, 843.15pt x 522.95375pt>
 File: 1(c)image11.png Graphic file (type png)
 <use 1(c)image11.png>
-Package pdftex.def Info: 1(c)image11.png  used on input line 84.
+Package pdftex.def Info: 1(c)image11.png  used on input line 85.
 (pdftex.def)             Requested size: 213.39566pt x 132.34999pt.
 <1(c)image12.png, id=43, 856.19875pt x 536.0025pt>
 File: 1(c)image12.png Graphic file (type png)
 <use 1(c)image12.png>
-Package pdftex.def Info: 1(c)image12.png  used on input line 93.
+Package pdftex.def Info: 1(c)image12.png  used on input line 94.
 (pdftex.def)             Requested size: 213.39566pt x 133.59135pt.
 <1(c)image13.png, id=44, 852.18375pt x 531.9875pt>
 File: 1(c)image13.png Graphic file (type png)
 <use 1(c)image13.png>
-Package pdftex.def Info: 1(c)image13.png  used on input line 94.
+Package pdftex.def Info: 1(c)image13.png  used on input line 95.
 (pdftex.def)             Requested size: 213.39566pt x 133.21571pt.
 <1(c)image14.png, id=45, 843.15pt x 530.98375pt>
 File: 1(c)image14.png Graphic file (type png)
 <use 1(c)image14.png>
-Package pdftex.def Info: 1(c)image14.png  used on input line 96.
+Package pdftex.def Info: 1(c)image14.png  used on input line 97.
 (pdftex.def)             Requested size: 213.39566pt x 134.38223pt.
 <1(c)image15.png, id=46, 845.1575pt x 524.96124pt>
 File: 1(c)image15.png Graphic file (type png)
 <use 1(c)image15.png>
-Package pdftex.def Info: 1(c)image15.png  used on input line 97.
+Package pdftex.def Info: 1(c)image15.png  used on input line 98.
 (pdftex.def)             Requested size: 213.39566pt x 132.54565pt.
  [3 <./1(c)image8.png> <./1(c)image9.png> <./1(c)image10.png> <./1(c)image11.pn
 g> <./1(c)image12.png> <./1(c)image13.png>]
@@ -866,54 +870,71 @@ g> <./1(c)image12.png> <./1(c)image13.png>]
 <2(c)image1.png, id=61, 603.25375pt x 371.3875pt>
 File: 2(c)image1.png Graphic file (type png)
 <use 2(c)image1.png>
-Package pdftex.def Info: 2(c)image1.png  used on input line 125.
+Package pdftex.def Info: 2(c)image1.png  used on input line 126.
 (pdftex.def)             Requested size: 156.49014pt x 96.33745pt.
 <2(c)image2.png, id=62, 599.23875pt x 389.455pt>
 File: 2(c)image2.png Graphic file (type png)
 <use 2(c)image2.png>
-Package pdftex.def Info: 2(c)image2.png  used on input line 126.
+Package pdftex.def Info: 2(c)image2.png  used on input line 127.
 (pdftex.def)             Requested size: 156.49014pt x 101.7016pt.
 <2(c)image3.png, id=63, 575.14874pt x 350.30875pt>
 File: 2(c)image3.png Graphic file (type png)
 <use 2(c)image3.png>
-Package pdftex.def Info: 2(c)image3.png  used on input line 127.
+Package pdftex.def Info: 2(c)image3.png  used on input line 128.
 (pdftex.def)             Requested size: 156.49014pt x 95.31158pt.
 <2(c)pca1.png, id=64, 826.08624pt x 350.30875pt>
 File: 2(c)pca1.png Graphic file (type png)
 <use 2(c)pca1.png>
-Package pdftex.def Info: 2(c)pca1.png  used on input line 132.
+Package pdftex.def Info: 2(c)pca1.png  used on input line 133.
 (pdftex.def)             Requested size: 384.1122pt x 162.88654pt.
 <2(c)pca2.png, id=65, 906.38625pt x 331.2375pt>
 File: 2(c)pca2.png Graphic file (type png)
 <use 2(c)pca2.png>
-Package pdftex.def Info: 2(c)pca2.png  used on input line 134.
+Package pdftex.def Info: 2(c)pca2.png  used on input line 135.
 (pdftex.def)             Requested size: 384.1122pt x 140.37225pt.
 <2(c)pca3.png, id=66, 841.1425pt x 345.29pt>
 File: 2(c)pca3.png Graphic file (type png)
 <use 2(c)pca3.png>
-Package pdftex.def Info: 2(c)pca3.png  used on input line 136.
+Package pdftex.def Info: 2(c)pca3.png  used on input line 137.
 (pdftex.def)             Requested size: 384.1122pt x 157.67621pt.
  [5 <./2(c)image1.png> <./2(c)image2.png> <./2(c)image3.png> <./2(c)pca1.png> <
 ./2(c)pca2.png> <./2(c)pca3.png>]
-(./new_report.aux) ) 
+LaTeX Font Info:    Try loading font information for T1+aett on input line 143.
+
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/ae/t1aett.fd
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+<3(a)2-1.png, id=76, 964.60374pt x 277.035pt>
+File: 3(a)2-1.png Graphic file (type png)
+<use 3(a)2-1.png>
+Package pdftex.def Info: 3(a)2-1.png  used on input line 161.
+(pdftex.def)             Requested size: 384.1122pt x 110.31744pt.
+<3(a)2-2.png, id=77, 1000.73875pt x 84.315pt>
+File: 3(a)2-2.png Graphic file (type png)
+<use 3(a)2-2.png>
+Package pdftex.def Info: 3(a)2-2.png  used on input line 163.
+(pdftex.def)             Requested size: 384.1122pt x 32.36295pt.
+ [6 <./3(a)2-1.png> <./3(a)2-2.png>] (./new_report.aux) ) 
 Here is how much of TeX's memory you used:
- 13936 strings out of 492649
- 263640 string characters out of 6129622
- 311025 words of memory out of 5000000
- 17495 multiletter control sequences out of 15000+600000
- 25424 words of font info for 62 fonts, out of 8000000 for 9000
+ 14047 strings out of 492649
+ 265170 string characters out of 6129622
+ 312111 words of memory out of 5000000
+ 17595 multiletter control sequences out of 15000+600000
+ 26545 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,6n,73p,978b,203s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr17.pfb>
-Output written on new_report.pdf (5 pages, 4027610 bytes).
+ 54i,6n,73p,978b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/20
+18/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/201
+8/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on new_report.pdf (6 pages, 4132825 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 104 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 
