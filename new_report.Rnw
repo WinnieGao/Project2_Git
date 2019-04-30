@@ -155,7 +155,7 @@ See \url{https://github.com/WinnieGao/Project2_Git} for more detailed explanatio
 \textbf{a. Different Classification Models}
 
 To train the data, we try several different classification methods: Generalized Linear Model, Linear Discriminant Analysis, Quadratic Discriminant Analysis, K-nearest Neighbor and Support Vector Machine.
-For GLM, LDA and QDA, since, in our natural world, most phenomena can be approximated using Gaussion distribution, we assume our data sets are under Gaussian distribution, which means LDA and QDA are appliable. Since Gaussian distribution is exponential family, we can also apply GLM in our case. Since there is no specific assumptions for using KNN nad SVM, they are also satisfied.
+For GLM, LDA and QDA, since, in our natural world, most phenomena can be approximated using Gaussion distribution, we assume our data sets are under Gaussian distribution, which means LDA and QDA are appliable. Since Gaussian distribution is exponential family, we can also apply GLM in our case. Since there is no specific assumptions for using KNN and SVM, they are also satisfied.
 
 We used cross-validation with 8 folds to train the models, and get the accuracies across all folds and the averaged one. We also apply the model on the test set and get the accuracy on the test set.
 
