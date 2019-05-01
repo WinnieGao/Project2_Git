@@ -166,21 +166,13 @@ For the second one, the cross-validation average accuracies demonstrate that QDA
 \mbox{}\\
 \textbf{b. ROC curves}
 
-We then plot ROC curves for each classification method. We don't plot a ROC curve for KNN, because the model does not calculate the probabily of being each class. It directly gives the classification result instead, and we don't really think it is worthy changing the hyperparameter K here. We first draw the ROC curves for the second splitting method.
-
-The ROC curves are drawn below with cutoff value we choose marked for second splitting method:
-
-\includegraphics[width = 7.5cm]{3(b)2-1}
-\includegraphics[width = 7.5cm]{3(b)2-2}
-
-\includegraphics[width = 7.5cm]{3(b)2-3}
-\includegraphics[width = 7.5cm]{3(b)2-4}
+We then plot ROC curves for each classification method. We don't plot a ROC curve for KNN, because the model does not calculate the probabily of being each class. It directly gives the classification result instead, and we don't really think it is worthy changing the hyperparameter K here. 
 
 In each model, we choose the cutoff value that has the smallest distance to (0, 1). We do so because we want to maximize true positive rate and minimize false positive rate at the same time. We did not put more weight on true positive rate because, unlike the medical cases, the incorrect classifications of both clouded or cloud-free pixels have same consequence on our result.
 
-To choose a best method according to the ROC curves, we calculate the distance between the point we marked and (0, 1). The smaller distance indicates a better model. GLM has a distance of 0.019, SVM has a distance of 0.021, LDA has a distance of 0.019, QDA has a distance of 0.023. The distances of different methods does not change very much. Then, we also calculate the AUC for each classification method. The larger AUC indicate a better model. The area under GLM's ROC curve is 0.9635, the area under SVM's ROC curve is 0.9613, the area under LDA's ROC curve is 0.9635 and the area under QDA's ROC curve is 0.9581. Considering the both of these two factors, for the second splitting method, we think GLM and LDA are better than the rest of two.
+To choose a best method according to the ROC curves, we calculate the distance between the point we marked and (0, 1). The smaller distance indicates a better model.
 
-Similarly, we analyze the the ROC curves for first spliting method:
+The ROC curves are drawn below with cutoff value we choose marked for first splitting method:
 
 \includegraphics[width = 7.5cm]{3(b)1-1}
 \includegraphics[width = 7.5cm]{3(b)1-2}
@@ -188,8 +180,43 @@ Similarly, we analyze the the ROC curves for first spliting method:
 \includegraphics[width = 7.5cm]{3(b)1-3}
 \includegraphics[width = 7.5cm]{3(b)1-4}
 
+In the first spliting method, GLM and LDA have the same distance 0.1291 to the (0,1) and the same value 0.8239 for the area under the ROC curve value. 
 
 
+Similarly, we analyze the the ROC curves for second spliting method:
+
+\includegraphics[width = 7.5cm]{3(b)2-1}
+\includegraphics[width = 7.5cm]{3(b)2-2}
+
+\includegraphics[width = 7.5cm]{3(b)2-3}
+\includegraphics[width = 7.5cm]{3(b)2-4}
+
+In the second spliting method, GLM has a distance of 0.019, SVM has a distance of 0.021, LDA has a distance of 0.019, QDA has a distance of 0.023. The distances of different methods does not change very much. Then, we also calculate the AUC for each classification method. The larger AUC indicate a better model. The area under GLM's ROC curve is 0.9635, the area under SVM's ROC curve is 0.9613, the area under LDA's ROC curve is 0.9635 and the area under QDA's ROC curve is 0.9581. Considering both of these two factors, for the second splitting method, we think GLM and LDA are better than the rest of two.
+
+
+
+\section{Diagnostics}
+
+\vspace{0.2cm}
+\textbf{a. In-depth Analysis}
+
+According to the analysis above, we think second splitting method is better and QDA is the best classification method in our case. Therefore, we do some in-depth analysis on QDA for the second splitting method.
+
+The means and covariances of each class are shown as follows:
+
+Mean and Covariance matrix for design matrix classified as cloud:
+
+\includegraphics[width = 7.5cm]{4(a)1}
+\includegraphics[width = 7.5cm]{4(a)2}
+
+Mean and Covariance matrix for design matrix classified as cloud-free:
+
+\includegraphics[width = 7.5cm]{4(a)3}
+\includegraphics[width = 7.5cm]{4(a)4}
+
+The high variances (covariances between features themselves) means that the corresponding features have a lot of expressiveness. In other words, features with low variances are close to a constant. In our case, we prefer features with larger variances. For the rest covariances (covariances between different features), features with high covariances have a lot of redundancy for each other. Since we hope the features can capture as much as possible, we prefer features with low covariances.
+
+In our covariance matrices, SD has very high variance and relatively low covariance. SD is the best feature of these three. CORR has lowest variance and relatively high covariance. We may want to improve our model by changing this feature to another.
 
 
 

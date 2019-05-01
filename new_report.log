@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 APR 2019 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 APR 2019 21:17
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **new_report.tex
 (./new_report.tex
@@ -916,69 +916,90 @@ File: 3(a)2acuracy.png Graphic file (type png)
 Package pdftex.def Info: 3(a)2acuracy.png  used on input line 163.
 (pdftex.def)             Requested size: 441.01772pt x 215.79802pt.
  [6 <./3(a)1acuracy.png>]
-<3(b)2-1.png, id=83, 873.2625pt x 525.965pt>
-File: 3(b)2-1.png Graphic file (type png)
-<use 3(b)2-1.png>
-Package pdftex.def Info: 3(b)2-1.png  used on input line 173.
-(pdftex.def)             Requested size: 213.39566pt x 128.52145pt.
-<3(b)2-2.png, id=84, 871.255pt x 523.9575pt>
-File: 3(b)2-2.png Graphic file (type png)
-<use 3(b)2-2.png>
-Package pdftex.def Info: 3(b)2-2.png  used on input line 174.
-(pdftex.def)             Requested size: 213.39566pt x 128.32674pt.
-<3(b)2-3.png, id=85, 857.2025pt x 519.9425pt>
-File: 3(b)2-3.png Graphic file (type png)
-<use 3(b)2-3.png>
-Package pdftex.def Info: 3(b)2-3.png  used on input line 176.
-(pdftex.def)             Requested size: 213.39566pt x 129.43788pt.
-<3(b)2-4.png, id=86, 865.2325pt x 519.9425pt>
-File: 3(b)2-4.png Graphic file (type png)
-<use 3(b)2-4.png>
-Package pdftex.def Info: 3(b)2-4.png  used on input line 177.
-(pdftex.def)             Requested size: 213.39566pt x 128.23196pt.
- [7 <./3(a)2acuracy.png> <./3(b)2-1.png> <./3(b)2-2.png> <./3(b)2-3.png> <./3(b
-)2-4.png>]
-<3(b)1-1.png, id=96, 569.12625pt x 358.33875pt>
+<3(b)1-1.png, id=83, 569.12625pt x 358.33875pt>
 File: 3(b)1-1.png Graphic file (type png)
 <use 3(b)1-1.png>
-Package pdftex.def Info: 3(b)1-1.png  used on input line 185.
+Package pdftex.def Info: 3(b)1-1.png  used on input line 177.
 (pdftex.def)             Requested size: 213.39566pt x 134.36029pt.
-<3(b)1-2.png, id=97, 723.70375pt x 445.665pt>
+<3(b)1-2.png, id=84, 723.70375pt x 445.665pt>
 File: 3(b)1-2.png Graphic file (type png)
 <use 3(b)1-2.png>
-Package pdftex.def Info: 3(b)1-2.png  used on input line 186.
+Package pdftex.def Info: 3(b)1-2.png  used on input line 178.
 (pdftex.def)             Requested size: 213.39566pt x 131.40883pt.
-<3(b)1-3.png, id=98, 712.6625pt x 435.6275pt>
+<3(b)1-3.png, id=85, 712.6625pt x 435.6275pt>
 File: 3(b)1-3.png Graphic file (type png)
 <use 3(b)1-3.png>
-Package pdftex.def Info: 3(b)1-3.png  used on input line 188.
+Package pdftex.def Info: 3(b)1-3.png  used on input line 180.
 (pdftex.def)             Requested size: 213.39566pt x 130.43666pt.
-<3(b)1-4.png, id=99, 719.68875pt x 441.65pt>
+<3(b)1-4.png, id=86, 719.68875pt x 441.65pt>
 File: 3(b)1-4.png Graphic file (type png)
 <use 3(b)1-4.png>
-Package pdftex.def Info: 3(b)1-4.png  used on input line 189.
+Package pdftex.def Info: 3(b)1-4.png  used on input line 181.
 (pdftex.def)             Requested size: 213.39566pt x 130.95277pt.
- [8 <./3(b)1-1.png> <./3(b)1-2.png> <./3(b)1-3.png> <./3(b)1-4.png>] (./new_rep
-ort.aux) ) 
+ [7 <./3(a)2acuracy.png> <./3(b)1-1.png> <./3(b)1-2.png> <./3(b)1-3.png> <./3(b
+)1-4.png>]
+<3(b)2-1.png, id=96, 873.2625pt x 525.965pt>
+File: 3(b)2-1.png Graphic file (type png)
+<use 3(b)2-1.png>
+Package pdftex.def Info: 3(b)2-1.png  used on input line 188.
+(pdftex.def)             Requested size: 213.39566pt x 128.52145pt.
+<3(b)2-2.png, id=97, 871.255pt x 523.9575pt>
+File: 3(b)2-2.png Graphic file (type png)
+<use 3(b)2-2.png>
+Package pdftex.def Info: 3(b)2-2.png  used on input line 189.
+(pdftex.def)             Requested size: 213.39566pt x 128.32674pt.
+<3(b)2-3.png, id=98, 857.2025pt x 519.9425pt>
+File: 3(b)2-3.png Graphic file (type png)
+<use 3(b)2-3.png>
+Package pdftex.def Info: 3(b)2-3.png  used on input line 191.
+(pdftex.def)             Requested size: 213.39566pt x 129.43788pt.
+<3(b)2-4.png, id=99, 865.2325pt x 519.9425pt>
+File: 3(b)2-4.png Graphic file (type png)
+<use 3(b)2-4.png>
+Package pdftex.def Info: 3(b)2-4.png  used on input line 192.
+(pdftex.def)             Requested size: 213.39566pt x 128.23196pt.
+<4(a)1.png, id=100, 288.07625pt x 53.19875pt>
+File: 4(a)1.png Graphic file (type png)
+<use 4(a)1.png>
+Package pdftex.def Info: 4(a)1.png  used on input line 209.
+(pdftex.def)             Requested size: 213.39566pt x 39.40866pt.
+<4(a)2.png, id=101, 331.2375pt x 86.3225pt>
+File: 4(a)2.png Graphic file (type png)
+<use 4(a)2.png>
+Package pdftex.def Info: 4(a)2.png  used on input line 210.
+(pdftex.def)             Requested size: 213.39566pt x 55.61237pt.
+<4(a)3.png, id=102, 293.095pt x 47.17625pt>
+File: 4(a)3.png Graphic file (type png)
+<use 4(a)3.png>
+Package pdftex.def Info: 4(a)3.png  used on input line 214.
+(pdftex.def)             Requested size: 213.39566pt x 34.34766pt.
+<4(a)4.png, id=103, 346.29375pt x 90.3375pt>
+File: 4(a)4.png Graphic file (type png)
+<use 4(a)4.png>
+Package pdftex.def Info: 4(a)4.png  used on input line 215.
+(pdftex.def)             Requested size: 213.39566pt x 55.66956pt.
+ [8 <./3(b)2-1.png> <./3(b)2-2.png> <./3(b)2-3.png> <./3(b)2-4.png> <./4(a)1.pn
+g> <./4(a)2.png> <./4(a)3.png> <./4(a)4.png>] [9]
+(./new_report.aux) ) 
 Here is how much of TeX's memory you used:
- 14087 strings out of 492649
- 265812 string characters out of 6129622
- 312112 words of memory out of 5000000
- 17627 multiletter control sequences out of 15000+600000
+ 14107 strings out of 492649
+ 266068 string characters out of 6129622
+ 312111 words of memory out of 5000000
+ 17643 multiletter control sequences out of 15000+600000
  26545 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  54i,6n,73p,978b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-bx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
-pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pf
-b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
->
-Output written on new_report.pdf (8 pages, 5223546 bytes).
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmtt10.pfb>
+Output written on new_report.pdf (9 pages, 5287973 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 139 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 187 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 207 words of extra memory for PDF output out of 10000 (max. 10000000)
 
