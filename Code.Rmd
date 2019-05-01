@@ -460,6 +460,7 @@ test_accuracy
 3(b)
 ```{r}
 library(ROCR)
+library(pROC)
 rocplot <- function(pred, truth, main) {
   predob = prediction(pred, truth)
   perf = performance(predob, "tpr", "fpr")
@@ -487,6 +488,8 @@ alpha_glm = slot(perf_glm, "alpha.values")[[1]]
 index_glm = bestalpha(x_glm, y_glm, alpha_glm)
 glm = data.frame(x_axis = x_glm, y_axis = y_glm, label = rep("GLM", length(x_glm)))
 ggplot(glm, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_glm[index_glm], y = y_glm[index_glm], color = "red"), show.legend = FALSE) + annotate("text", x = x_glm[index_glm], y = y_glm[index_glm] + 0.08, label = "alpha = -0.2624315" ) + ggtitle("ROC for GLM") + xlab("False Positive Rate") + ylab("True Positive Rate")
+roc(test_data[, "expert_label"], fitted_glm, plot = TRUE, print.auc = TRUE)
+x_glm[index_glm] ^ 2 + (y_glm[index_glm] - 1) ^ 2
 
 
 svmfit.opt = svm(expert_label ~ NDAI + SD + CORR, data = train_val_data, kernel = "linear", cost = 1)
@@ -498,6 +501,8 @@ alpha_svm = slot(perf_svm, "alpha.values")[[1]]
 index_svm = bestalpha(x_svm, y_svm, alpha_svm)
 svm = data.frame(x_axis = x_svm, y_axis = y_svm, label = rep("SVM", length(x_svm)))
 ggplot(svm, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_svm[index_svm], y = y_svm[index_svm], color = "red"), show.legend = FALSE) + annotate("text", x = x_svm[index_svm], y = y_svm[index_svm] + 0.08, label = "alpha = 0.01198434" ) + ggtitle("ROC for SVM") + xlab("False Positive Rate") + ylab("True Positive Rate")
+x_svm[index_svm] ^ 2 + (y_svm[index_svm] - 1) ^ 2
+roc(test_data[, "expert_label"], fitted_svm, plot = TRUE, print.auc = TRUE)
 
 
 
@@ -510,6 +515,8 @@ alpha_lda = slot(perf_lda, "alpha.values")[[1]]
 index_lda = bestalpha(x_lda, y_lda, alpha_lda)
 lda = data.frame(x_axis = x_lda, y_axis = y_lda, label = rep("LDA", length(x_lda)))
 ggplot(lda, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_lda[index_lda], y = y_lda[index_lda], color = "red"), show.legend = FALSE) + annotate("text", x = x_lda[index_lda], y = y_lda[index_lda] + 0.08, label = "alpha = 0.1961443" ) + ggtitle("ROC for LDA") + xlab("False Positive Rate") + ylab("True Positive Rate")
+x_lda[index_lda] ^ 2 + (y_lda[index_lda] - 1) ^ 2
+roc(test_data[, "expert_label"], fitted_lda$posterior[,2], plot = TRUE, print.auc = TRUE)
 
 qdafit.opt = qda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
 fitted_qda = predict(qdafit.opt, test_data)
@@ -519,7 +526,9 @@ y_qda = slot(perf_qda, 'y.values')[[1]]
 alpha_qda = slot(perf_qda, "alpha.values")[[1]]
 index_qda = bestalpha(x_qda, y_qda, alpha_qda)
 qda = data.frame(x_axis = x_qda, y_axis = y_qda, label = rep("QDA", length(x_qda)))
-ggplot(qda, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_qda[index_qda], y = y_qda[index_qda], color = "red"), show.legend = FALSE) + annotate("text", x = x_qda[index_qda], y = y_qda[index_qda] + 0.08, label = "alpha = 0.04849714" ) + ggtitle("ROC for LDA") + xlab("False Positive Rate") + ylab("True Positive Rate")
+ggplot(qda, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_qda[index_qda], y = y_qda[index_qda], color = "red"), show.legend = FALSE) + annotate("text", x = x_qda[index_qda], y = y_qda[index_qda] + 0.08, label = "alpha = 0.04849714" ) + ggtitle("ROC for QDA") + xlab("False Positive Rate") + ylab("True Positive Rate")
+x_qda[index_qda] ^ 2 + (y_qda[index_qda] - 1) ^ 2
+roc(test_data[, "expert_label"], fitted_qda$posterior[,2], plot = TRUE, print.auc = TRUE)
 
 ```
 
