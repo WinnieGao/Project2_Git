@@ -524,5 +524,23 @@ ggplot(qda, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_qd
 ```
 
 
+## Problem 4
+After comparing two splitting methods and different classification methods, we believe that, in our case, the second splitting method is better than the first one, and QDA has best performance on this splitted data.
+
+* 4(a)
+```{r}
+train_cloud = train_val_data[train_val_data$expert_label == 1, c("NDAI", "SD", "CORR")]
+colMeans(train_cloud)
+cov(train_cloud)
+train_empty = train_val_data[train_val_data$expert_label == -1, c("NDAI", "SD", "CORR")]
+colMeans(train_cloud)
+cov(train_empty)
+```
+The means and covariances of each class are shown as follows:
+
+The high variances (covariances between features themselves) means that the corresponding features have a lot of expressiveness. In other words, features with low variances are close to a constant. In our case, we prefer features with larger variances. For the rest covariances (covariances between different features), features with high covariances have a lot of redundancy for each other. Since we hope the features can capture as much as possible, we prefer features with low covariances.
+
+In our covariance matrices, SD has very high variance and relatively low covariance. SD is the best feature of these three. CORR has lowest variance and relatively high covariance. We may want to improve our model by changing this feature to another.
+
 
 
