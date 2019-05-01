@@ -552,4 +552,24 @@ The high variances (covariances between features themselves) means that the corr
 In our covariance matrices, SD has very high variance and relatively low covariance. SD is the best feature of these three. CORR has lowest variance and relatively high covariance. We may want to improve our model by changing this feature to another.
 
 
+* 4(b)
+For our best classification model which is QDA, we analyze the misclassification by showing ranges of feature values. We also apply our trained model to three different image data sets and plot the misclassified data point on the original map to check if they are in particular regrions.
+
+In the test data, we pick all misclassified data points and plot boxplots for each feature based on two different classification errors (False Positive and False Negative).
+```{r}
+pre_result = fitted_qda$class
+mis = test_data[pre_result != test_data[, "expert_label"], ]
+correct = test_data[pre_result == test_data[, "expert_label"], ]
+
+ggplot(correct, aes(x = as.factor(expert_label), y = NDAI)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled NDAI Range")
+ggplot(mis, aes(x = as.factor(expert_label), y = NDAI)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified NDAI Range")
+
+ggplot(correct, aes(x = as.factor(expert_label), y = SD)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled SD Range")
+ggplot(mis, aes(x = as.factor(expert_label), y = SD)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified SD Range")
+
+ggplot(correct, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled CORR Range")
+ggplot(mis, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified CORR Range")
+```
+
+
 
