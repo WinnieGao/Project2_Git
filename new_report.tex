@@ -193,6 +193,15 @@ Similarly, we analyze the the ROC curves for second spliting method:
 In the second spliting method, GLM has a distance of 0.019, SVM has a distance of 0.021, LDA has a distance of 0.019, QDA has a distance of 0.023. The distances of different methods does not change very much. Then, we also calculate the AUC for each classification method. The larger AUC indicate a better model. The area under GLM's ROC curve is 0.9635, the area under SVM's ROC curve is 0.9613, the area under LDA's ROC curve is 0.9635 and the area under QDA's ROC curve is 0.9581. Considering both of these two factors, for the second splitting method, we think GLM and LDA are better than the rest of two.
 
 
+\vspace{0.3cm}
+\mbox{}\\
+\textbf{c. (Bonus) Assessing with New Metric}
+
+Having a high accuracy is not enough to evaluate a particular model. Suppose we have a trivial classifier, which is predicting all data points as 1, we may still get a very high accuracy since most data points are marked as 1 in our training and test data set, but it by no means proves this model is good.
+
+Therefore, we come up with two new metrics that can avoid this kind of coincidence: Among all pixels labeled as cloud, what is the proportion of the pixels that have true label as cloud. Simiarly, Among all pixels with true label as cloud, what is the proportion of pixels we predicted as cloud. The first is called "precision" and the second one is called "recall". Since they defined very similarly and have similar effect, in this report, we only use precision as a new metric to evaluate our model to save time.
+
+
 
 \section{Diagnostics}
 
