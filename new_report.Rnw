@@ -162,7 +162,7 @@ We use cross-validation with 8 folds to train the models, and get accuracies acr
 
 For our first splitting method, the cross-validataion averaged accuracies show that LDA, QDA,SVM and KNN all return great performance with an accuracy above 0.91. Among them, LDA performs the best on the validataion data with 0.9286555 accauray and GLM gives the lowest average cross-validation accuarcy. As for the performance on the test set, all models gives lower accurary about 0.7 to 0.8. KNN gives the best accuracy and GLM returns the worst performance on the test set. Considering both the accuracies on the validation and test set, QDA performs relatively better than other models. Hence, we conclude that QDA is the best model for the first spliting data.  
 
-\includegraphics[width = 15.5cm]{3(a)1acuracy}
+\includegraphics[width = 14.5cm]{3(a)1acuracy}
 
 For the second one, the cross-validation average accuracies demonstrate that LDA have the best performance on validation data. QDA also has a high accuracy on test data, but LDA performs better. GLM has lowest average cross-validation accuracy on validation set and svm performs worst on test data. Considering both average validation set accuracies and test set accuracies, we believe that QDA is also the best model for the second splitting method.
 
@@ -210,11 +210,9 @@ Therefore, we come up with two new metrics that can avoid this kind of coinciden
 
 The precision for our models are as follows:
 
-\includegraphics[width = 7.5cm]{3(b)2-1}
+\includegraphics[width = 12.5cm]{3(c)1}
 
 We can see that test precisions of our models give different ranking from our test accuracies.
-
-
 
 
 \section{Diagnostics}
@@ -279,11 +277,13 @@ We notice that the data at the boundary of clouded and cloud-free pixels are oft
 \textbf{c. Better Classifier}
 
 Based on the analysis in the previous two sections, we come up with two ways to improve our classifier.
-First, as we mentioned above, the three features selected are not expressive enough to train our model. We decide to add a new feature to train our QDA. Recall the PCA figures we plotted in the second part. Among the rest of the five raw features, DF stands out as the best. Therefore, we add DF as a new feature and train our QDA classification model again on our training data. The final accuracy on test data arises from 0.98930 to 0.99762, which is better than the original QDA model. For future data without expert label, we believe our data can work well because our average accuracy over 8 folds cross validation and test accuracy are quite high. Moreover, QDA won't take that much time to train and predict as other classification methods like svm and knn.
+First, as we mentioned above, the three features selected are not expressive enough to train our model. We decide to add a new feature to train our QDA. Recall the PCA figures we plotted in the second part. Among the rest of the five raw features, DF stands out as the best. Therefore, we add DF as a new feature and train our QDA classification model again on our training data. The final accuracy on test data arises from 0.9155 to 0.9251, which is better than the original QDA model. For future data without expert label, we believe our data can work well because our average accuracy over 8 folds cross validation and test accuracy are quite high. Moreover, QDA won't take that much time to train and predict as other classification methods like svm and knn.
 
-Secondly, QDA requires that the data should be Gaussian distribution, but we cannot ensure that the future data are strictly meet this requirement. Therefore, we also tried Random Forest to train our data. Since we don't have a large number features, Random Forest is quitely suitable in our case.
+Secondly, QDA requires that the data should be Gaussian distribution, but we cannot ensure that the future data are strictly meet this requirement. Therefore, we also tried Random Forest to train our data. Since we don't have a large number of features, Random Forest is suitable in our case.
 
-We choose to consider 3 features at each split and 25 trees for each forest. We first use cross-validation to have accuracies over 8 folds. The average accuracy is 0.9975. Then we train our model on entire training data and get a accuracy of 0.9576 on test data. Even though the accuracies might be slightly worse than those of QDA, since random forest do not have particular assumption on the data set, the accuracy on future data should remain around the same.
+\includegraphics[width = 10.5cm]{4(c)RandomForest}
+
+We choose to consider 3 features at each split and 25 trees for each forest. We train our model on train data and get a test accuracy of 0.9224 on test data, which perform better than QDA model with test accuary 0.9155. Moreover,random forest does not have particular assumption on the data set, the accuracy on future data should remain around the same. Hence, we confirm that random forest is a better classifier. 
 
 \vspace{0.3cm}
 \mbox{}\\
