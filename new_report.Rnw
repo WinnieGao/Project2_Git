@@ -269,5 +269,39 @@ Secondly, QDA requires that the data should be Gaussian distribution, but we can
 
 We first run our model using original three features on training data and get a 0.99418 accuracy on test data.
 
+\vspace{0.3cm}
+\textbf{d. Changes after modification of splitting method}
+
+The results change after we use splitting method 1.
+
+\mbox{}\\
+Mean and Covariance matrix for design matrix classified as cloud using splitting method 1
+
+\includegraphics[width = 7.5cm]{4(d)1}
+\includegraphics[width = 7.5cm]{4(d)2}
+
+\mbox{}\\
+Mean and Covariance matrix for design matrix classified as cloud-free using splitting method 1
+
+\includegraphics[width = 7.5cm]{4(d)3}
+\includegraphics[width = 7.5cm]{4(d)4}
+
+The mean and covariance .....
+
+\includegraphics[width = 7.5cm]{4(d)nadi1}
+\includegraphics[width = 7.5cm]{4(d)nadi2}
+
+\includegraphics[width = 7.5cm]{4(d)sd1}
+\includegraphics[width = 7.5cm]{4(d)sd1}
+
+\includegraphics[width = 7.5cm]{4(d)corr1}
+\includegraphics[width = 7.5cm]{4(d)corr2}
+
+The box plots ......
+
+\includegraphics[width = 6cm]{4(d)image1}
+\includegraphics[width = 6cm]{4(d)image2}
+\includegraphics[width = 6cm]{4(d)image3}
+
 
 \end{document}
