@@ -651,18 +651,48 @@ cov(train_empty)
 ```
 
 ```{r}
-pre_result = fitted_qda$class
-mis = test_data[pre_result != test_data[, "expert_label"], ]
-correct = test_data[pre_result == test_data[, "expert_label"], ]
 
-ggplot(correct, aes(x = as.factor(expert_label), y = NDAI)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled NDAI Range")
-ggplot(mis, aes(x = as.factor(expert_label), y = NDAI)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified NDAI Range")
+not_cloud_NDAI = correct[correct$expert_label == -1,]
+not_cloud_NDAI$label = rep("True Label (cloud-free)", nrow(not_cloud_NDAI))
+false_pos_NDAI = mis[mis$expert_label == 1,]
+false_pos_NDAI$label = rep("False Positive", nrow(false_pos_NDAI))
+plot1 = rbind(not_cloud_NDAI, false_pos_NDAI)
+ggplot(plot1, aes(x = NDAI, color = label)) + geom_density() + ggtitle("Density Curve for NDAI: Cloud-free vs. False Positive")
 
-ggplot(correct, aes(x = as.factor(expert_label), y = SD)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled SD Range")
-ggplot(mis, aes(x = as.factor(expert_label), y = SD)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified SD Range")
+cloud_NDAI = correct[correct$expert_label == 1,]
+cloud_NDAI$label = rep("True Label (cloud)", nrow(cloud_NDAI))
+false_neg_NDAI = mis[mis$expert_label == -1,]
+false_neg_NDAI$label = rep("False Negative", nrow(false_neg_NDAI))
+plot2 = rbind(cloud_NDAI, false_neg_NDAI)
+ggplot(plot2, aes(x = NDAI, color = label)) + geom_density() + ggtitle("Density Curve for NDAI: Cloud vs. False Negative")
 
-ggplot(correct, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled CORR Range")
-ggplot(mis, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified CORR Range")
+not_cloud_SD = correct[correct$expert_label == -1,]
+not_cloud_SD$label = rep("True Label (cloud-free)", nrow(not_cloud_SD))
+false_pos_SD = mis[mis$expert_label == 1,]
+false_pos_SD$label = rep("False Positive", nrow(false_pos_SD))
+plot3 = rbind(not_cloud_SD, false_pos_SD)
+ggplot(plot3, aes(x = SD, color = label)) + geom_density() + ggtitle("Density Curve for SD: Cloud-free vs. False Positive")
+
+cloud_SD = correct[correct$expert_label == 1,]
+cloud_SD$label = rep("True Label (cloud)", nrow(cloud_SD))
+false_neg_SD = mis[mis$expert_label == -1,]
+false_neg_SD$label = rep("False Negative", nrow(false_neg_SD))
+plot4 = rbind(cloud_SD, false_neg_SD)
+ggplot(plot4, aes(x = SD, color = label)) + geom_density() + ggtitle("Density Curve for SD: Cloud vs. False Negative")
+
+not_cloud_CORR = correct[correct$expert_label == -1,]
+not_cloud_CORR$label = rep("True Label (cloud-free)", nrow(not_cloud_CORR))
+false_pos_CORR = mis[mis$expert_label == 1,]
+false_pos_CORR$label = rep("False Positive", nrow(false_pos_CORR))
+plot5 = rbind(not_cloud_CORR, false_pos_CORR)
+ggplot(plot5, aes(x = CORR, color = label)) + geom_density() + ggtitle("Density Curve for CORR: Cloud-free vs. False Positive")
+
+cloud_CORR = correct[correct$expert_label == 1,]
+cloud_CORR$label = rep("True Label (cloud)", nrow(cloud_CORR))
+false_neg_CORR = mis[mis$expert_label == -1,]
+false_neg_CORR$label = rep("False Negative", nrow(false_neg_CORR))
+plot6 = rbind(cloud_CORR, false_neg_CORR)
+ggplot(plot6, aes(x = CORR, color = label)) + geom_density() + ggtitle("Density Curve for CORR: Cloud vs. False Negative")
 ```
 
 ```{r}
@@ -677,4 +707,6 @@ ggplot(image2_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point
 pred_image3 = predict(qdafit.opt, image3_clear)
 image3_result = data.frame(x = image3_clear$x_coord, y = image3_clear$y_coord, label = pred_image3$class)
 ggplot(image3_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image3") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+
 ```
+

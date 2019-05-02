@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 MAY 2019 14:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 MAY 2019 15:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1076,38 +1076,38 @@ File: 4(d)4.png Graphic file (type png)
 <use 4(d)4.png>
 Package pdftex.def Info: 4(d)4.png  used on input line 299.
 (pdftex.def)             Requested size: 213.39566pt x 57.31955pt.
-<4(d)ndai1.png, id=143, 603.25375pt x 374.39874pt>
+<4(d)ndai1.png, id=143, 596.2275pt x 376.40625pt>
 File: 4(d)ndai1.png Graphic file (type png)
 <use 4(d)ndai1.png>
 Package pdftex.def Info: 4(d)ndai1.png  used on input line 303.
-(pdftex.def)             Requested size: 213.39566pt x 132.43546pt.
-<4(d)ndai2.png, id=144, 597.23125pt x 372.39125pt>
+(pdftex.def)             Requested size: 213.39566pt x 134.71928pt.
+<4(d)ndai2.png, id=144, 589.20125pt x 364.36125pt>
 File: 4(d)ndai2.png Graphic file (type png)
 <use 4(d)ndai2.png>
 Package pdftex.def Info: 4(d)ndai2.png  used on input line 304.
-(pdftex.def)             Requested size: 213.39566pt x 133.06067pt.
+(pdftex.def)             Requested size: 213.39566pt x 131.96498pt.
  [10 <./4(c)RandomForest.png> <./4(d)1.png> <./4(d)2.png> <./4(d)3.png> <./4(d)
 4.png>]
-<4(d)sd1.png, id=153, 603.25375pt x 367.3725pt>
+<4(d)sd1.png, id=153, 588.1975pt x 369.38pt>
 File: 4(d)sd1.png Graphic file (type png)
 <use 4(d)sd1.png>
 Package pdftex.def Info: 4(d)sd1.png  used on input line 306.
-(pdftex.def)             Requested size: 213.39566pt x 129.95007pt.
-<4(d)sd2.png, id=154, 600.2425pt x 375.4025pt>
+(pdftex.def)             Requested size: 213.39566pt x 134.00813pt.
+<4(d)sd2.png, id=154, 591.20876pt x 362.35374pt>
 File: 4(d)sd2.png Graphic file (type png)
 <use 4(d)sd2.png>
 Package pdftex.def Info: 4(d)sd2.png  used on input line 307.
-(pdftex.def)             Requested size: 213.39566pt x 133.46071pt.
-<4(d)corr1.png, id=155, 598.235pt x 377.41pt>
+(pdftex.def)             Requested size: 213.39566pt x 130.79004pt.
+<4(d)corr1.png, id=155, 594.22pt x 364.36125pt>
 File: 4(d)corr1.png Graphic file (type png)
 <use 4(d)corr1.png>
 Package pdftex.def Info: 4(d)corr1.png  used on input line 309.
-(pdftex.def)             Requested size: 213.39566pt x 134.62358pt.
-<4(d)corr2.png, id=156, 604.2575pt x 374.39874pt>
+(pdftex.def)             Requested size: 213.39566pt x 130.84747pt.
+<4(d)corr2.png, id=156, 595.22375pt x 369.38pt>
 File: 4(d)corr2.png Graphic file (type png)
 <use 4(d)corr2.png>
 Package pdftex.def Info: 4(d)corr2.png  used on input line 310.
-(pdftex.def)             Requested size: 213.39566pt x 132.21837pt.
+(pdftex.def)             Requested size: 213.39566pt x 132.42433pt.
 <4(d)image1.png, id=157, 594.22pt x 376.40625pt>
 File: 4(d)image1.png Graphic file (type png)
 <use 4(d)image1.png>
@@ -1146,7 +1146,7 @@ c/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb>
-Output written on new_report.pdf (11 pages, 7552507 bytes).
+Output written on new_report.pdf (11 pages, 7810925 bytes).
 PDF statistics:
  193 PDF objects out of 1000 (max. 8388607)
  48 compressed objects within 1 object stream
