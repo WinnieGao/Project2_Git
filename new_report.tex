@@ -203,6 +203,13 @@ Having a high accuracy is not enough to evaluate a particular model. Suppose we 
 
 Therefore, we come up with two new metrics that can avoid this kind of coincidence: Among all pixels labeled as cloud, what is the proportion of the pixels that have true label as cloud. Simiarly, Among all pixels with true label as cloud, what is the proportion of pixels we predicted as cloud. The first is called "precision" and the second one is called "recall". Since they defined very similarly and have similar effect, in this report, we only use precision as a new metric to evaluate our model to save time.
 
+The precision for our models are as follows:
+
+\includegraphics[width = 7.5cm]{3(b)2-1}
+
+We can see that test precisions of our models give different ranking from our test accuracies.
+
+
 
 
 \section{Diagnostics}
@@ -271,7 +278,7 @@ First, as we mentioned above, the three features selected are not expressive eno
 
 Secondly, QDA requires that the data should be Gaussian distribution, but we cannot ensure that the future data are strictly meet this requirement. Therefore, we also tried Random Forest to train our data. Since we don't have a large number features, Random Forest is quitely suitable in our case.
 
-We choose to consider 3 features at each split 25 nodes in each tree. We first use cross-validation to have accuracies over 8 folds. The average accuracy is 0.9975. Then we train our model on entire training data and get a accuracy of 0.9576 on test data. Even though the accuracies might be slightly worse than those of QDA, since random forest do not have particular assumption on the data set, the accuracy on future data should remain around the same.
+We choose to consider 3 features at each split and 25 trees for each forest. We first use cross-validation to have accuracies over 8 folds. The average accuracy is 0.9975. Then we train our model on entire training data and get a accuracy of 0.9576 on test data. Even though the accuracies might be slightly worse than those of QDA, since random forest do not have particular assumption on the data set, the accuracy on future data should remain around the same.
 
 \vspace{0.3cm}
 \mbox{}\\
