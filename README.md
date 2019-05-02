@@ -22,6 +22,7 @@ In our report, we come up with two totally different splitting methods, which ar
 4. QDA
 5. SVM
 6. RandomForest
+
 We train all 6 models on two differently splitted data. We use accuracy and precision to evaluate the performances of our models. 
 
 
