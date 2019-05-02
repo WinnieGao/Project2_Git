@@ -246,20 +246,18 @@ In our covariance matrices, SD has very high variance and relatively low covaria
 
 For our best classification model which is QDA, we analyze the misclassification by showing ranges of feature values. We also apply our trained model to three different image data sets and plot the misclassified data point on the original map to check if they are in particular regrions.
 
-In the test data, we pick all misclassified data points and plot boxplots for each feature based on two different classification errors (False Positive and False Negative).
+In the test data, we pick all misclassified data points and plot density curves for each feature based on two different classification errors (False Positive and False Negative). And we compare these curves with that of data with true label.
 
-\includegraphics[width = 7.5cm]{4(b)1}
-\includegraphics[width = 7.5cm]{4(b)2}
+\includegraphics[width = 7.5cm]{4(b)NDAI1}
+\includegraphics[width = 7.5cm]{4(b)NDAI2}
 
-\includegraphics[width = 7.5cm]{4(b)3}
-\includegraphics[width = 7.5cm]{4(b)4}
+\includegraphics[width = 7.5cm]{4(b)SD1}
+\includegraphics[width = 7.5cm]{4(b)SD2}
 
-\includegraphics[width = 7.5cm]{4(b)5}
-\includegraphics[width = 7.5cm]{4(b)6}
+\includegraphics[width = 7.5cm]{4(b)CORR1}
+\includegraphics[width = 7.5cm]{4(b)CORR2}
 
-The plot on the left is the data correctly classified and the plot on the right are those misclassified. Comparing groups of distributions (Not Cloud vs. False Positive \& Cloud vs. False Negative) for NDAI, we see they have a different range and are differently distributed, which means the mispredicted data have a partiular pattern on this feature. Thus, we can conclude that our model can easily predict data with cloud as not clouded when their NDAI have high values and more tend to predict data without cloud as clouded when their NDAI have extremely low value. 
-
-The data in plots of SD and CORR have quite similar distributions for both groups. So misclassification does not have particular patterns for these two features.
+The plots on the left are data marked as cloud-free (both correctly and incorrectly classified) and the plots on the right are those marked as clouded. In the first plot(Density Curve for NDAI: Cloud-free vs. FP), two plots have different distribution: the curve for true labeled data is right-skewed and the curve for false labeled data is left skewed, which demonstrates that, when NDAIs of the pixels have high values, our classifier will easily predict them as clouded although they are cloud-free. For data that are misclassified as cloud-free, NDAI has a very narrow range: from around 1.35 to 1.6. Data with NDAI in this range are very likely to be misclassified as cloud-free. Density curves of SD on the left shows that data with higher SD have larger possibility to be misclassified as cloud. For data that are misclassified as cloud-free, SD has a extremely small range compared with true label: from 0 to about 3. Most data with SD in this range are misclassified as cloud-free. CORR does not have particular pattern for data misclassified as cloud, but for those misclassified as cloud-free, CORR has a small range: from about -0.15 to 0.15. Similarly, data with CORR in this range have very high possibility to be classified as cloud-free.
 
 Then, we use our trained QDA model to predict data points in three image data sets (data points with expert label of 0 are excluded). And plot the predicted labels for each image data set.
 

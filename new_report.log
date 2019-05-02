@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 MAY 2019 15:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 MAY 2019 16:20
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **new_report.tex
 (./new_report.tex
@@ -998,155 +998,155 @@ File: 4(a)4.png Graphic file (type png)
 <use 4(a)4.png>
 Package pdftex.def Info: 4(a)4.png  used on input line 232.
 (pdftex.def)             Requested size: 213.39566pt x 55.66956pt.
-<4(b)1.png, id=109, 867.24pt x 515.9275pt>
-File: 4(b)1.png Graphic file (type png)
-<use 4(b)1.png>
-Package pdftex.def Info: 4(b)1.png  used on input line 246.
-(pdftex.def)             Requested size: 213.39566pt x 126.95047pt.
-<4(b)2.png, id=110, 855.195pt x 519.9425pt>
-File: 4(b)2.png Graphic file (type png)
-<use 4(b)2.png>
-Package pdftex.def Info: 4(b)2.png  used on input line 247.
-(pdftex.def)             Requested size: 213.39566pt x 129.73936pt.
  [8 <./3(c)1.png> <./4(a)1.png> <./4(a)2.png> <./4(a)3.png> <./4(a)4.png>]
-<4(b)3.png, id=119, 849.1725pt x 521.95pt>
-File: 4(b)3.png Graphic file (type png)
-<use 4(b)3.png>
-Package pdftex.def Info: 4(b)3.png  used on input line 249.
-(pdftex.def)             Requested size: 213.39566pt x 131.16414pt.
-<4(b)4.png, id=120, 856.19875pt x 523.9575pt>
-File: 4(b)4.png Graphic file (type png)
-<use 4(b)4.png>
-Package pdftex.def Info: 4(b)4.png  used on input line 250.
-(pdftex.def)             Requested size: 213.39566pt x 130.5893pt.
-<4(b)5.png, id=121, 865.2325pt x 518.93875pt>
-File: 4(b)5.png Graphic file (type png)
-<use 4(b)5.png>
-Package pdftex.def Info: 4(b)5.png  used on input line 252.
-(pdftex.def)             Requested size: 213.39566pt x 127.9844pt.
-<4(b)6.png, id=122, 854.19125pt x 530.98375pt>
-File: 4(b)6.png Graphic file (type png)
-<use 4(b)6.png>
-Package pdftex.def Info: 4(b)6.png  used on input line 253.
-(pdftex.def)             Requested size: 213.39566pt x 132.64838pt.
+<4(b)NDAI1.png, id=117, 839.135pt x 513.92pt>
+File: 4(b)NDAI1.png Graphic file (type png)
+<use 4(b)NDAI1.png>
+Package pdftex.def Info: 4(b)NDAI1.png  used on input line 246.
+(pdftex.def)             Requested size: 213.39566pt x 130.69106pt.
+<4(b)NDAI2.png, id=118, 839.135pt x 515.9275pt>
+File: 4(b)NDAI2.png Graphic file (type png)
+<use 4(b)NDAI2.png>
+Package pdftex.def Info: 4(b)NDAI2.png  used on input line 247.
+(pdftex.def)             Requested size: 213.39566pt x 131.20157pt.
+<4(b)SD1.png, id=119, 840.13875pt x 517.935pt>
+File: 4(b)SD1.png Graphic file (type png)
+<use 4(b)SD1.png>
+Package pdftex.def Info: 4(b)SD1.png  used on input line 249.
+(pdftex.def)             Requested size: 213.39566pt x 131.55402pt.
+<4(b)SD2.png, id=120, 836.12375pt x 513.92pt>
+File: 4(b)SD2.png Graphic file (type png)
+<use 4(b)SD2.png>
+Package pdftex.def Info: 4(b)SD2.png  used on input line 250.
+(pdftex.def)             Requested size: 213.39566pt x 131.16156pt.
+<4(b)CORR1.png, id=121, 840.13875pt x 519.9425pt>
+File: 4(b)CORR1.png Graphic file (type png)
+<use 4(b)CORR1.png>
+Package pdftex.def Info: 4(b)CORR1.png  used on input line 252.
+(pdftex.def)             Requested size: 213.39566pt x 132.06392pt.
+<4(b)CORR2.png, id=122, 842.14626pt x 516.93124pt>
+File: 4(b)CORR2.png Graphic file (type png)
+<use 4(b)CORR2.png>
+Package pdftex.def Info: 4(b)CORR2.png  used on input line 253.
+(pdftex.def)             Requested size: 213.39566pt x 130.98357pt.
 <4(b)7.png, id=123, 838.13126pt x 515.9275pt>
 File: 4(b)7.png Graphic file (type png)
 <use 4(b)7.png>
-Package pdftex.def Info: 4(b)7.png  used on input line 261.
+Package pdftex.def Info: 4(b)7.png  used on input line 259.
 (pdftex.def)             Requested size: 170.71652pt x 105.08092pt.
 <4(b)8.png, id=124, 843.15pt x 518.93875pt>
 File: 4(b)8.png Graphic file (type png)
 <use 4(b)8.png>
-Package pdftex.def Info: 4(b)8.png  used on input line 262.
+Package pdftex.def Info: 4(b)8.png  used on input line 260.
 (pdftex.def)             Requested size: 170.71652pt x 105.06868pt.
 <4(b)9.png, id=125, 835.12pt x 519.9425pt>
 File: 4(b)9.png Graphic file (type png)
 <use 4(b)9.png>
-Package pdftex.def Info: 4(b)9.png  used on input line 263.
+Package pdftex.def Info: 4(b)9.png  used on input line 261.
 (pdftex.def)             Requested size: 170.71652pt x 106.28741pt.
 
-Overfull \hbox (6.44115pt too wide) in paragraph at lines 261--264
+Overfull \hbox (6.44115pt too wide) in paragraph at lines 259--262
 [][] [] [] 
  []
 
-[9 <./4(b)1.png> <./4(b)2.png> <./4(b)3.png> <./4(b)4.png> <./4(b)5.png> <./4(b
-)6.png> <./4(b)7.png> <./4(b)8.png> <./4(b)9.png>]
-<4(c)RandomForest.png, id=138, 454.69875pt x 184.69pt>
+[9 <./4(b)NDAI1.png> <./4(b)NDAI2.png> <./4(b)SD1.png> <./4(b)SD2.png> <./4(b)C
+ORR1.png> <./4(b)CORR2.png>]
+<4(c)RandomForest.png, id=135, 454.69875pt x 184.69pt>
 File: 4(c)RandomForest.png Graphic file (type png)
 <use 4(c)RandomForest.png>
-Package pdftex.def Info: 4(c)RandomForest.png  used on input line 279.
+Package pdftex.def Info: 4(c)RandomForest.png  used on input line 277.
 (pdftex.def)             Requested size: 298.75394pt x 121.34904pt.
-<4(d)1.png, id=139, 243.91125pt x 43.16125pt>
+<4(d)1.png, id=136, 243.91125pt x 43.16125pt>
 File: 4(d)1.png Graphic file (type png)
 <use 4(d)1.png>
-Package pdftex.def Info: 4(d)1.png  used on input line 292.
+Package pdftex.def Info: 4(d)1.png  used on input line 290.
 (pdftex.def)             Requested size: 213.39566pt x 37.76204pt.
-<4(d)2.png, id=140, 306.14375pt x 80.3pt>
+<4(d)2.png, id=137, 306.14375pt x 80.3pt>
 File: 4(d)2.png Graphic file (type png)
 <use 4(d)2.png>
-Package pdftex.def Info: 4(d)2.png  used on input line 293.
+Package pdftex.def Info: 4(d)2.png  used on input line 291.
 (pdftex.def)             Requested size: 213.39566pt x 55.9719pt.
-<4(d)3.png, id=141, 268.00125pt x 52.195pt>
+ [10 <./4(b)7.png> <./4(b)8.png> <./4(b)9.png> <./4(c)RandomForest.png>]
+<4(d)3.png, id=145, 268.00125pt x 52.195pt>
 File: 4(d)3.png Graphic file (type png)
 <use 4(d)3.png>
-Package pdftex.def Info: 4(d)3.png  used on input line 298.
+Package pdftex.def Info: 4(d)3.png  used on input line 296.
 (pdftex.def)             Requested size: 213.39566pt x 41.56012pt.
-<4(d)4.png, id=142, 310.15875pt x 83.31125pt>
+<4(d)4.png, id=146, 310.15875pt x 83.31125pt>
 File: 4(d)4.png Graphic file (type png)
 <use 4(d)4.png>
-Package pdftex.def Info: 4(d)4.png  used on input line 299.
+Package pdftex.def Info: 4(d)4.png  used on input line 297.
 (pdftex.def)             Requested size: 213.39566pt x 57.31955pt.
-<4(d)ndai1.png, id=143, 596.2275pt x 376.40625pt>
+<4(d)ndai1.png, id=147, 596.2275pt x 376.40625pt>
 File: 4(d)ndai1.png Graphic file (type png)
 <use 4(d)ndai1.png>
-Package pdftex.def Info: 4(d)ndai1.png  used on input line 303.
+Package pdftex.def Info: 4(d)ndai1.png  used on input line 301.
 (pdftex.def)             Requested size: 213.39566pt x 134.71928pt.
-<4(d)ndai2.png, id=144, 589.20125pt x 364.36125pt>
+<4(d)ndai2.png, id=148, 589.20125pt x 364.36125pt>
 File: 4(d)ndai2.png Graphic file (type png)
 <use 4(d)ndai2.png>
-Package pdftex.def Info: 4(d)ndai2.png  used on input line 304.
+Package pdftex.def Info: 4(d)ndai2.png  used on input line 302.
 (pdftex.def)             Requested size: 213.39566pt x 131.96498pt.
- [10 <./4(c)RandomForest.png> <./4(d)1.png> <./4(d)2.png> <./4(d)3.png> <./4(d)
-4.png>]
-<4(d)sd1.png, id=153, 588.1975pt x 369.38pt>
+<4(d)sd1.png, id=149, 588.1975pt x 369.38pt>
 File: 4(d)sd1.png Graphic file (type png)
 <use 4(d)sd1.png>
-Package pdftex.def Info: 4(d)sd1.png  used on input line 306.
+Package pdftex.def Info: 4(d)sd1.png  used on input line 304.
 (pdftex.def)             Requested size: 213.39566pt x 134.00813pt.
-<4(d)sd2.png, id=154, 591.20876pt x 362.35374pt>
+<4(d)sd2.png, id=150, 591.20876pt x 362.35374pt>
 File: 4(d)sd2.png Graphic file (type png)
 <use 4(d)sd2.png>
-Package pdftex.def Info: 4(d)sd2.png  used on input line 307.
+Package pdftex.def Info: 4(d)sd2.png  used on input line 305.
 (pdftex.def)             Requested size: 213.39566pt x 130.79004pt.
-<4(d)corr1.png, id=155, 594.22pt x 364.36125pt>
+<4(d)corr1.png, id=151, 594.22pt x 364.36125pt>
 File: 4(d)corr1.png Graphic file (type png)
 <use 4(d)corr1.png>
-Package pdftex.def Info: 4(d)corr1.png  used on input line 309.
+Package pdftex.def Info: 4(d)corr1.png  used on input line 307.
 (pdftex.def)             Requested size: 213.39566pt x 130.84747pt.
-<4(d)corr2.png, id=156, 595.22375pt x 369.38pt>
+<4(d)corr2.png, id=152, 595.22375pt x 369.38pt>
 File: 4(d)corr2.png Graphic file (type png)
 <use 4(d)corr2.png>
-Package pdftex.def Info: 4(d)corr2.png  used on input line 310.
+Package pdftex.def Info: 4(d)corr2.png  used on input line 308.
 (pdftex.def)             Requested size: 213.39566pt x 132.42433pt.
-<4(d)image1.png, id=157, 594.22pt x 376.40625pt>
+<4(d)image1.png, id=153, 594.22pt x 376.40625pt>
 File: 4(d)image1.png Graphic file (type png)
 <use 4(d)image1.png>
-Package pdftex.def Info: 4(d)image1.png  used on input line 314.
+Package pdftex.def Info: 4(d)image1.png  used on input line 312.
 (pdftex.def)             Requested size: 170.71652pt x 108.13841pt.
-<4(d)image2.png, id=158, 591.20876pt x 374.39874pt>
+<4(d)image2.png, id=154, 591.20876pt x 374.39874pt>
 File: 4(d)image2.png Graphic file (type png)
 <use 4(d)image2.png>
-Package pdftex.def Info: 4(d)image2.png  used on input line 315.
+Package pdftex.def Info: 4(d)image2.png  used on input line 313.
 (pdftex.def)             Requested size: 170.71652pt x 108.1101pt.
-<4(d)image3.png, id=159, 595.22375pt x 373.395pt>
+<4(d)image3.png, id=155, 595.22375pt x 373.395pt>
 File: 4(d)image3.png Graphic file (type png)
 <use 4(d)image3.png>
-Package pdftex.def Info: 4(d)image3.png  used on input line 316.
+Package pdftex.def Info: 4(d)image3.png  used on input line 314.
 (pdftex.def)             Requested size: 170.71652pt x 107.09099pt.
 
-Overfull \hbox (6.44115pt too wide) in paragraph at lines 314--317
+Overfull \hbox (6.44115pt too wide) in paragraph at lines 312--315
 [][] [] [] 
  []
 
-[11 <./4(d)ndai1.png> <./4(d)ndai2.png> <./4(d)sd1.png> <./4(d)sd2.png> <./4(d)
-corr1.png> <./4(d)corr2.png> <./4(d)image1.png> <./4(d)image2.png> <./4(d)image
-3.png>] (./new_report.aux) ) 
+[11 <./4(d)1.png> <./4(d)2.png> <./4(d)3.png> <./4(d)4.png> <./4(d)ndai1.png> <
+./4(d)ndai2.png> <./4(d)sd1.png> <./4(d)sd2.png> <./4(d)corr1.png> <./4(d)corr2
+.png> <./4(d)image1.png> <./4(d)image2.png> <./4(d)image3.png>]
+(./new_report.aux) ) 
 Here is how much of TeX's memory you used:
  14227 strings out of 492649
- 267834 string characters out of 6129622
- 312112 words of memory out of 5000000
+ 267934 string characters out of 6129622
+ 312111 words of memory out of 5000000
  17739 multiletter control sequences out of 15000+600000
  26545 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,6n,73p,1002b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmtt10.pfb>
-Output written on new_report.pdf (11 pages, 7818817 bytes).
+ 54i,6n,73p,1270b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmtt10.pfb>
+Output written on new_report.pdf (11 pages, 8180586 bytes).
 PDF statistics:
  193 PDF objects out of 1000 (max. 8388607)
  48 compressed objects within 1 object stream
