@@ -13,5 +13,7 @@ The goal of this project is the exploration and modeling of cloud detection in t
 The images under this repository was created by two Rmd files. The images in our final write-up is fixed.
    
 ## Data Processing
+In our report, we come up with two totally different splitting methods, which are separately run in two Rmd files. Method1.Rmd corresponds to the first method and Method2.Rmd corresponds to the second. 
+
 
 
