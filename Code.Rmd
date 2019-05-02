@@ -571,5 +571,21 @@ ggplot(correct, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + s
 ggplot(mis, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified CORR Range")
 ```
 
+Then, we use our trained QDA model to predict data points in three image data sets (data points with expert label of 0 are excluded)
 
+```{r}
+pred_image1 = predict(qdafit.opt, image1_clear)
+image1_result  = data.frame(x = image1_clear$x_coord, y = image1_clear$y_coord, label = pred_image1$class)
+ggplot(image1_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image1") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+
+pred_image2 = predict(qdafit.opt, image2_clear)
+image2_result = data.frame(x = image2_clear$x_coord, y = image2_clear$y_coord, label = pred_image2$class)
+ggplot(image2_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image2") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+
+pred_image3 = predict(qdafit.opt, image3_clear)
+image3_result = data.frame(x = image3_clear$x_coord, y = image3_clear$y_coord, label = pred_image3$class)
+ggplot(image3_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image3") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+
+mean(image3_result$label == image3_clear$expert_label)
+```
 
