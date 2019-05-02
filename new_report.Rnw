@@ -208,6 +208,13 @@ Having a high accuracy is not enough to evaluate a particular model. Suppose we 
 
 Therefore, we come up with two new metrics that can avoid this kind of coincidence: Among all pixels labeled as cloud, what is the proportion of the pixels that have true label as cloud. Simiarly, Among all pixels with true label as cloud, what is the proportion of pixels we predicted as cloud. The first is called "precision" and the second one is called "recall". Since they defined very similarly and have similar effect, in this report, we only use precision as a new metric to evaluate our model to save time.
 
+The precision for our models are as follows:
+
+\includegraphics[width = 7.5cm]{3(b)2-1}
+
+We can see that test precisions of our models give different ranking from our test accuracies.
+
+
 
 
 \section{Diagnostics}
@@ -254,9 +261,7 @@ In the test data, we pick all misclassified data points and plot boxplots for ea
 
 The plot on the left is the data correctly classified and the plot on the right are those misclassified. Comparing groups of distributions (Not Cloud vs. False Positive \& Cloud vs. False Negative) for NDAI, we see they have a different range and are differently distributed, which means the mispredicted data have a partiular pattern on this feature. Thus, we can conclude that our model can easily predict data with cloud as not clouded when their NDAI have high values and more tend to predict data without cloud as clouded when their NDAI have extremely low value. 
 
-The data in plots for SD have quite similar distributions for both groups. However, we have very different range particularly for the False-negative boxplot, which means, when SD is very low, our model can very easily predict pixels with cloud as non-clouded.
-
-And finally for CORR, we have similar distributions for Cloud and false-negative boxplots but have different distributions for not-cloud and false-positive boxplots. Our model tend to predict some pixels with high CORR as cloud-free. This can be explained by the phenonmenon that pixels have high correlation for cloud-free areas. 
+The data in plots of SD and CORR have quite similar distributions for both groups. So misclassification does not have particular patterns for these two features.
 
 Then, we use our trained QDA model to predict data points in three image data sets (data points with expert label of 0 are excluded). And plot the predicted labels for each image data set.
 
