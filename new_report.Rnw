@@ -247,6 +247,16 @@ The data in plots for SD have quite similar distributions for both groups. Howev
 
 And finally for CORR, we have similar distributions for Cloud and false-negative boxplots but have different distributions for not-cloud and false-positive boxplots. Our model tend to predict some pixels with high CORR as cloud-free. This can be explained by the phenonmenon that pixels have high correlation for cloud-free areas. 
 
+Then, we use our trained QDA model to predict data points in three image data sets (data points with expert label of 0 are excluded). And plot the predicted labels for each image data set.
+
+\includegraphics[width = 6cm]{4(b)7}
+\includegraphics[width = 6cm]{4(b)8}
+\includegraphics[width = 6cm]{4(b)9}
+
+Comparing these three scatterplots with those in Part1b, we notice that there are several inconsistencies in our plots. The inconsistencies imply the misclassified data points. 
+
+We notice that the data at the boundary of clouded and cloud-free pixels are often misclassified. More importantly, we realize that there are several small blocks that are entirely misclassified. For example, in the first image, the small patch between the upper left two larger patches are classified as cloud while they should have been marked as cloud-free. This is probably because our model is not expressive enough to sperate out the rapid change. In image2, we have significantly fewer misclassified data points. This again verifies that our model is underfitting for image1. The same explanation can also be applied to the third image.
+
 
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  1 MAY 2019 16:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  1 MAY 2019 17:35
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1026,27 +1026,47 @@ File: 4(b)6.png Graphic file (type png)
 Package pdftex.def Info: 4(b)6.png  used on input line 237.
 (pdftex.def)             Requested size: 213.39566pt x 132.64838pt.
  [8 <./4(b)1.png> <./4(b)2.png> <./4(b)3.png> <./4(b)4.png> <./4(b)5.png> <./4(
-b)6.png>] [9]
-(./new_report.aux) ) 
+b)6.png>]
+<4(b)7.png, id=127, 838.13126pt x 515.9275pt>
+File: 4(b)7.png Graphic file (type png)
+<use 4(b)7.png>
+Package pdftex.def Info: 4(b)7.png  used on input line 247.
+(pdftex.def)             Requested size: 170.71652pt x 105.08092pt.
+<4(b)8.png, id=128, 843.15pt x 518.93875pt>
+File: 4(b)8.png Graphic file (type png)
+<use 4(b)8.png>
+Package pdftex.def Info: 4(b)8.png  used on input line 248.
+(pdftex.def)             Requested size: 170.71652pt x 105.06868pt.
+<4(b)9.png, id=129, 835.12pt x 519.9425pt>
+File: 4(b)9.png Graphic file (type png)
+<use 4(b)9.png>
+Package pdftex.def Info: 4(b)9.png  used on input line 249.
+(pdftex.def)             Requested size: 170.71652pt x 106.28741pt.
+
+Overfull \hbox (6.44115pt too wide) in paragraph at lines 247--250
+[][] [] [] 
+ []
+
+[9 <./4(b)7.png> <./4(b)8.png> <./4(b)9.png>] (./new_report.aux) ) 
 Here is how much of TeX's memory you used:
- 14137 strings out of 492649
- 266452 string characters out of 6129622
+ 14152 strings out of 492649
+ 266644 string characters out of 6129622
  312111 words of memory out of 5000000
- 17667 multiletter control sequences out of 15000+600000
+ 17679 multiletter control sequences out of 15000+600000
  26545 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  54i,6n,73p,978b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmtt10.pfb>
-Output written on new_report.pdf (9 pages, 5638191 bytes).
+</usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive
+/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2
+018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on new_report.pdf (9 pages, 6545539 bytes).
 PDF statistics:
- 151 PDF objects out of 1000 (max. 8388607)
+ 157 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 237 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 252 words of extra memory for PDF output out of 10000 (max. 10000000)
 
