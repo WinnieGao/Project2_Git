@@ -270,6 +270,7 @@ Secondly, QDA requires that the data should be Gaussian distribution, but we can
 We first run our model using original three features on training data and get a 0.99418 accuracy on test data.
 
 \vspace{0.3cm}
+\mbox{}\\
 \textbf{d. Changes after modification of splitting method}
 
 The results change after we use splitting method 1.
@@ -286,18 +287,18 @@ Mean and Covariance matrix for design matrix classified as cloud-free using spli
 \includegraphics[width = 7.5cm]{4(d)3}
 \includegraphics[width = 7.5cm]{4(d)4}
 
-The mean and covariance .....
+The mean and covariance are 
 
-\includegraphics[width = 7.5cm]{4(d)nadi1}
-\includegraphics[width = 7.5cm]{4(d)nadi2}
+\includegraphics[width = 7.5cm]{4(d)ndai1}
+\includegraphics[width = 7.5cm]{4(d)ndai2}
 
 \includegraphics[width = 7.5cm]{4(d)sd1}
-\includegraphics[width = 7.5cm]{4(d)sd1}
+\includegraphics[width = 7.5cm]{4(d)sd2}
 
 \includegraphics[width = 7.5cm]{4(d)corr1}
 \includegraphics[width = 7.5cm]{4(d)corr2}
 
-The box plots ......
+The box plots above show that 
 
 \includegraphics[width = 6cm]{4(d)image1}
 \includegraphics[width = 6cm]{4(d)image2}
