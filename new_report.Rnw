@@ -31,9 +31,9 @@ Climate changes has been a popular topic in scientific research. Particularly, t
 
 MISR collects a massive amount of data from its nine cameras viewing at a different angel in four spectral. It covers the daylight side of the Earth from the Arctic down to Antarctica in 45 minutes and completes all paths in 16 days of a cycle. Each path is subdivided into blocks, with the block numbers increasing from the North Pole to South Pole, and each complete trip of MISR around the Earth is counted as a unique orbit. However, due to the transmission channel constraints, only the red radiances and all channels from the nadir camera are transmitted at full 275m * 275m resolution. The remaining blue, green and near-infrared radiances from the non-nadir cameras are aggregated to a lower resolution before transmission. 
 
-Scientists utilizes correlations in brightness among multiple MISR views of the same scene under cloud-free conditions to model the surface. This new algorithm, enhances linear correlation matching (ELCM), is based on thresholding three features: the correlation (CORR) of MISR images, the standard deviation (SD\_An) of the MISR nadir camera pixel values, and a normalized difference angular index (NDAI) to create labels for classification. Then, the resulting labels are used in the second algorithm, ELCM-QDA, to produce more informative probability prediction. 
+Scientists utilizes correlations in brightness among multiple MISR views of the same scene under cloud-free conditions to model the surface. This new algorithm, enhanced linear correlation matching (ELCM), is based on thresholding three features: the correlation (CORR) of MISR images, the standard deviation (SD) of the MISR nadir camera pixel values, and a normalized difference angular index (NDAI) to create labels for classification. Then, the resulting labels are used in the second algorithm, ELCM-QDA, to produce more informative probability prediction. 
 
-The results suggest that the ELCM algorithm based on the three features outperform those existing algorithms based only on the radiation measurement, where it provides better spatial coverage for cloud detection in the Arctic. Moreover, the ELCM algorithm combines classification and clustering framework to fit the MISR data processing, which help improve the computational speed online effectively. 
+The results suggest that the ELCM algorithm based on the three features outperforms those existing algorithms based only on the radiation measurement, where it provides better spatial coverage for cloud detection in the Arctic. Moreover, the ELCM algorithm combines classification and clustering framework to fit the MISR data processing, which helps improve the computational speed online effectively. 
 
 This research not only creates a better algorithm to implement cloud detection but also encourages further study on the changing cloud properties to the warming Arctic. In addition, it demonstrates the significant impact of statistics in successfully solving a modern scientific problem. Statisticians are now directly involved in the data processing and use powerful statistical thinking to help tackle challenges. \par
 
@@ -41,7 +41,8 @@ This research not only creates a better algorithm to implement cloud detection b
 \mbox{}\\
 \textbf{b. Summery of Data}
 
-For image1 data, there are 115229 data points. We calculate \% of pixels for the different classes: 17.77\% classified as cloud, 43.78\% as not cloud and 38.46\% as unlabeled. For image2 data, there are 115110 data points. We calculate \% of pixels for the different classes: 34.11\% classified as cloud, 37.25\% as not cloud and 28.64\% as unlabeled. For image3, there are 115217 data points. We calculate \% of pixels for the different classes: 18.44\% classified as cloud, 29.29\% as not cloud and 52.27\% as unlabeled. After we combined three image data sets, there are 345556 data points. We calculate \% of pixels for the different classes: 23.43\% classified as cloud, 36.78\% as not cloud and 39.79\% as unlabeled. 
+In image1 data set, there are 115229 data points. We calculate the percentage for pixels in two different classes: 17.77\% pixles are classified as cloud, 43.78\% pixels are classified as not cloud and 38.46\% pixels are marked as unlabeled. In image2 data set, there are 115110 data points. 34.11\% pixels are classified as cloud, 37.25\% pixels are classified as not cloud and 28.64\% pixels are marked as unlabeled. In image3 data set, there are 115217 data points. 18.44\% classified as cloud, 29.29\% as not cloud and 52.27\% as unlabeled. After we combined three image data sets, there are 345556 data points in total: 23.43\% classified as cloud, 36.78\% as not cloud and 39.79\% as unlabeled. 
+
 In order to view the pattern or trend for the data points, we plot scatter plots and color each data point according to their labels. 
 
 
@@ -49,7 +50,7 @@ In order to view the pattern or trend for the data points, we plot scatter plots
 \includegraphics[width = 6cm]{1(b)image2.png}
 \includegraphics[width = 6cm]{1(b)image3.png}
 
-From the three plots, we can see the pattern that the pixels with same labels are connected to each other, and unmarked pixels stay around those marked as clouds. This pattern contradicts to our assumption that the samples are i.i.d., because the pixels adjcent to pixels marked as clouds are more likely to be marked as clouds.
+From the three plots, we can see the patterns that the pixels with same labels are more tend to connect to each other, and unmarked pixels stay around those marked as clouds. This pattern contradicts to the assumption in the paper that the samples are independent and identically distributed because the pixels adjcent to pixels marked as cloud are more likely to be marked as cloud.
 
 
 \vspace{0.3cm}
@@ -64,8 +65,9 @@ To further explore our data, we also summarize the pairwise relationship between
 
 The three pairwise scatterplots all show that DF, CF, BF, AF and AN shows a linear relationship between each other, especially for AF and AN, AF and BF. However, we observe that data points in the third pairwise scatterplot spread more widely than in the first two pairwise sctterplots. The differences between three graphs can also show that the (linear) relationships decrease over time.
 
-After checking pairwise relationship plots, we study the relationship between each independent featues and their expert labels for each image and all data combined.
+After checking pairwise relationship plots, we study the relationship between each independent featues and their expert labels for each image separately and together.
 
+\mbox{}\\
 (relationship between expert label and NDAI)
 
 \includegraphics[width = 4.5cm]{1(c)image4.png}
@@ -75,7 +77,7 @@ After checking pairwise relationship plots, we study the relationship between ea
 
 The boxplots for CORR based on different labels show that CORR is on average higher for pixels marked as cloud than as not cloud. CORR also has a higher variance for those marked as cloud.
 
-This conclusion contradicts to the statement in the paper that high correlations over cloud-free areas or low clouds are expected. This is because high correlations for clouds also occur under rare circumstances. More importantly, recklessly declare clear for high CORR pixels and cloudy for low CORR pixels will produce errors due to smoothness of surface terrain and the difference of attitudes of clouds.
+This conclusion contradicts to the statement in the paper that high correlations over cloud-free or low-cloud areas are expected. This is because high correlations also occur under rare circumstances due to cloud movement. More importantly, recklessly declaring clear for high CORR pixels and cloudy for low CORR pixels will produce errors because of the smoothness of surface terrain and the difference of attitudes of clouds.
 
 Therefore, we should also involve the feature SD to identify surfaces into our investigation. We first plot SD vs. Label independently for each image and all data.
 
@@ -106,18 +108,18 @@ From the boxplots for NDAI based on different labels, we can clearly see that th
 \vspace{0.2cm}
 \textbf{a. Data Split}
 
-Even though the three image data set represent the cloud dsitribution at different times at the same place, we still decide to combine the data into one to have more data for training. We also clear out the unlabeled data here because they are not helpful enough for classification problem. Since the data are not i.i.d., we cannot simply split the data by random. 
+Even though the three image data sets represent the cloud dsitributions at different times at the same place, we decide to merge all data into one to have more data for training. We also clear out the unlabeled data here because they are not helpful for classification. Since the data are not i.i.d., we cannot simply split the data by random. To solve this problem, we come up with two different ways to split data into training, validation and test set.
 
 First method:
-We decided to divide the data into 25 groups by cutting the image horizontally. In this case, data with y\_coord from 2.0-78.2 and the corresponding x-coordinate are in the same group.  We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like a one-stage cluster sampling. Every time we sample a group wihout replacement and include all data points in that group. Data in the same groups tend to be correlated to each other, which fit the property of the non i.i.d. data.
+We divide the data into 25 groups by cutting the image horizontally. For example, data with y\_coord from 2.0 to 78.2 are in the same group.  We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting data in this way looks like a one-stage cluster sampling. Every time we sample a group wihout replacement and include all data points in that group. Data in the same groups tend to be correlated to each other, which fits the property of the non-i.i.d. data.
 
-Our Second method is, for each image data set, to divide all the data into 25 groups by cutting the image into 5*5 small images. For instance, data with y\_coord from 2.0-78.2 and x\_coord from 65.0-125.8 are in the same group. We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like stratified sampling. Every time we sample a group wihout replacement and include all data points in that group. We can also see this method as combining small pixels into a much larger one in a visual way. This method can guarantee pixels that have high correlations (adjacent pixels) can be sampled at the same time (except those on the boundary). And the random sampling on the 25 groups can make sure that we are not too sticking to the patterns for the training data so that overfitting can be somewhat prevented. 
+Our Second method is, for each image data set, to divide all the data into 25 groups by cutting the image into 5*5 sub-images. For instance, data with y\_coord from 2.0-78.2 and x\_coord from 65.0-125.8 are in the same group. Same as the first method, we randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like stratified sampling. Every time we sample a group wihout replacement and include all data points in that group. We can also see this method as combining small pixels into a much larger one in a visual way. This method can guarantee pixels that have high correlations (adjacent pixels) can be sampled at the same time (except those on the boundary). And the random sampling on the 25 groups can make sure that we are not too sticking to the patterns for the training data so that overfitting can be somewhat prevented. 
 
 \vspace{0.3cm}
 \mbox{}\\
 \textbf{b. Baseline}
 
-Setting all labels to -1, the accuracy for test data is 0.520 and that for validation data is 0.270, which are relatively low. If the test data and validation data contain mostly -1, the trivial classifier will have a high average accuracy.
+Setting all labels to -1, the accuracy for test data is 0.520 and that for validation data is 0.270, both of which are very low. Only if pixels marked as -1 have high frequency in the validation and test set, the trivial classifier will have a high average accuracy.
 
 \vspace{0.3cm}
 \mbox{}\\
@@ -125,13 +127,13 @@ Setting all labels to -1, the accuracy for test data is 0.520 and that for valid
 
 Recall in the EDA part, we notice that five raw features(DF, CF, BF, AF, AN) have high linear relationship between each other. To have more information represented by features, we will choose at most one from these five features.
 
-To find three best features, we first caculate and plot the correlation between those features and the expert labels. The magnitudes of the absolute values of the correlations represent how close the relationships are between features and expert labels. Larger correlation value means better features. We found that NDAI and CORR are better than others on average. 
+To find three best features, we first caculate and plot the correlation between each feature and expert label. The magnitudes of the absolute values of the correlations represent how close the relationships are between features and expert labels. Larger correlation value means a better feature. We find that NDAI and CORR are better than others on average. 
 
 \includegraphics[width = 5.5cm]{2(c)image1.png}
 \includegraphics[width = 5.5cm]{2(c)image2.png}
 \includegraphics[width = 5.5cm]{2(c)image3.png}
 
-Then, we plot biplots and loadings on first two PCs to see how much each feature contributes to these PCs. We choose to use two PCs because they capture almost 90\% of the data which is enough to represent the entire data set. The loading plots can illustrate the association between features and PCs. The larger the loading of a feature in a given PC, the more associated the feature is with that PC. After viewing the four loading plots, we observe that SD and DF have larger loadings than other features (expect NDAI and CORR). Considering there are other reasons that is more associated with scientific explanation, we decide to be consistent with the three features chosen in the paper, which are CORR, NDAI and SD.
+Then, we plot biplots and loadings on first two PCs to see how much each feature contributes to these PCs. We choose to use two PCs because they capture almost 90\% of the data which is enough to represent the entire data set. The loading plots can illustrate the association between features and PCs. The larger the loading of a feature is in a given PC, the more association the feature contains with that PC. After viewing the four loading plots, we observe that SD and DF have larger loadings than other features (expect NDAI and CORR). Considering there are other reasons that is more associated with scientific explanation, we decide to be consistent with the three features chosen in the paper, which are CORR, NDAI and SD.
 
 
 \includegraphics[width = 13cm]{2(c)pca1.png}
@@ -154,15 +156,15 @@ See \url{https://github.com/WinnieGao/Project2_Git} for more detailed explanatio
 \textbf{a. Different Classification Models}
 
 To train the data, we try several different classification methods: Generalized Linear Model, Linear Discriminant Analysis, Quadratic Discriminant Analysis, K-nearest Neighbor and Support Vector Machine.
-For GLM, LDA and QDA, since, in our natural world, most phenomena can be approximated using Gaussion distribution, we assume our data sets are under Gaussian distribution, which means LDA and QDA are applicable. Since Gaussian distribution is exponential family, we can also apply GLM in our case. Since there is no specific assumptions for using KNN and SVM, they are also satisfied.
+For GLM, LDA and QDA, since, in our natural world, most phenomena can be approximated using Gaussion distribution, we assume our data sets are under Gaussian distribution, which means LDA and QDA are feasible. Since Gaussian distribution is exponential family, we can also apply GLM in our case. And there is no specific assumptions for using KNN and SVM.
 
-We used cross-validation with 8 folds to train the models, and get the accuracies across all folds and the averaged one. We also apply the model on the test set and get the accuracy on the test set.
+We use cross-validation with 8 folds to train the models, and get accuracies across all folds and average them. We also apply the model on the test set and get an accuracy on the test set.
 
-For our first splitting method, the cross-validataion average accuracies shows that LDA, QDA,SVM and KNN all return  great performance with an accuracy above 0.91. Among them, LDA performs the best on the validataion data with 0.9286555 accauray and GLM gives the lowest average cross-validation accuarcy. As for the performance on the test set, all models gives lower accurary about 0.7 to 0.8. KNN gives the best accuracy and GLM returns the worst performance on the test set. Considering both the accuracies on the validation and test set, QDA performs relatively better than other models. Hence, we conclude that QDA is the best model for the first spliting data.  
+For our first splitting method, the cross-validataion averaged accuracies show that LDA, QDA,SVM and KNN all return great performance with an accuracy above 0.91. Among them, LDA performs the best on the validataion data with 0.9286555 accauray and GLM gives the lowest average cross-validation accuarcy. As for the performance on the test set, all models gives lower accurary about 0.7 to 0.8. KNN gives the best accuracy and GLM returns the worst performance on the test set. Considering both the accuracies on the validation and test set, QDA performs relatively better than other models. Hence, we conclude that QDA is the best model for the first spliting data.  
 
 \includegraphics[width = 15.5cm]{3(a)1acuracy}
 
-For the second one, the cross-validation average accuracies demonstrate that QDA have the best performance on validation data. QDA has a high accuracy on test data, but LDA performs better. GLM has lowest average cross-validation accuracy on validation set and svm performs worst on test data. Considering both average validation set accuracies and test set accuracies, we believe that QDA is also the best model for the second splitting method.
+For the second one, the cross-validation average accuracies demonstrate that LDA have the best performance on validation data. QDA also has a high accuracy on test data, but LDA performs better. GLM has lowest average cross-validation accuracy on validation set and svm performs worst on test data. Considering both average validation set accuracies and test set accuracies, we believe that QDA is also the best model for the second splitting method.
 
 \includegraphics[width = 15.5cm]{3(a)2acuracy}
 
