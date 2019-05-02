@@ -273,8 +273,7 @@ We choose to consider 3 features at each split 25 nodes in each tree. We first u
 \mbox{}\\
 \textbf{d. Changes after Modification of Splitting Method}
 
-
-The results change after we use splitting method 1.
+The results in parts 4(a) and 4(b) change as we use splitting method 1.  
 
 \mbox{}\\
 Mean and Covariance matrix for design matrix classified as cloud using splitting method 1
@@ -288,7 +287,7 @@ Mean and Covariance matrix for design matrix classified as cloud-free using spli
 \includegraphics[width = 7.5cm]{4(d)3}
 \includegraphics[width = 7.5cm]{4(d)4}
 
-The mean and covariance are 
+Applying the same feature preference rule we use in 4(b), a good feature would be the one with larger variances and low covariances. In the covariance matrix, 
 
 \includegraphics[width = 7.5cm]{4(d)ndai1}
 \includegraphics[width = 7.5cm]{4(d)ndai2}
