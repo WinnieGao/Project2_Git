@@ -542,7 +542,7 @@ train_cloud = train_val_data[train_val_data$expert_label == 1, c("NDAI", "SD", "
 colMeans(train_cloud)
 cov(train_cloud)
 train_empty = train_val_data[train_val_data$expert_label == -1, c("NDAI", "SD", "CORR")]
-colMeans(train_cloud)
+colMeans(train_empty)
 cov(train_empty)
 ```
 The means and covariances of each class are shown as follows:
