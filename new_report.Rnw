@@ -265,9 +265,9 @@ We notice that the data at the boundary of clouded and cloud-free pixels are oft
 Based on the analysis in the previous two sections, we come up with two ways to improve our classifier.
 First, as we mentioned above, the three features selected are not expressive enough to train our model. We decide to add a new feature to train our QDA. Recall the PCA figures we plotted in the second part. Among the rest of the five raw features, DF stands out as the best. Therefore, we add DF as a new feature and train our QDA classification model again on our training data. The final accuracy on test data arises from 0.98930 to 0.99762, which is better than the original QDA model. For future data without expert label, we believe our data can work well because our average accuracy over 8 folds cross validation and test accuracy are quite high. Moreover, QDA won't take that much time to train and predict as other classification methods like svm and knn.
 
-Secondly, QDA requires that the data should be Gaussian distribution, but we cannot ensure that the future data are strictly meet this requirement. Therefore, we also tried Random Forest to train our data. Since we don't have a large number features, Random Forest is suitable in our case.
+Secondly, QDA requires that the data should be Gaussian distribution, but we cannot ensure that the future data are strictly meet this requirement. Therefore, we also tried Random Forest to train our data. Since we don't have a large number features, Random Forest is quitely suitable in our case.
 
-We first run our model using original three features on training data and get a 0.99418 accuracy on test data.
+We choose to consider 3 features at each split 25 nodes in each tree. We first use cross-validation to have accuracies over 8 folds. The average accuracy is 0.9975. Then we train our model on entire training data and get a accuracy of 0.9576 on test data. Even though the accuracies might be slightly worse than those of QDA, since random forest do not have particular assumption on the data set, the accuracy on future data should remain around the same.
 
 \vspace{0.3cm}
 \mbox{}\\

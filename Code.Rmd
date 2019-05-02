@@ -589,6 +589,56 @@ ggplot(image3_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point
 mean(image3_result$label == image3_clear$expert_label)
 ```
 
+* 4(c)
+```{r}
+qda_accuracy_new = CVgeneric(qda, c("NDAI", "CORR", "SD", "DF"), c("expert_label"), 8, accuracy)
+qda_accuracy_avg_new = mean(qda_accuracy_new)
+qda_accuracy_avg_new
+model_qda_new = qda(expert_label ~ NDAI + SD + CORR + DF, data = train_val_data)
+y_prob = predict(model_qda_new, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_accuracy_qda_new = accuracy(y_hat, y)
+test_accuracy_qda_new
+```
+
+```{r}
+library(randomForest)
+rf = train_val_data
+set.seed(100)
+rf.opt = randomForest(as.factor(expert_label) ~ NDAI + SD + CORR, data = train_val_data, mtry = 3, ntree = 25, importance = TRUE)
+accuracy(predict(rf.opt, test_data), test_data$expert_label)
+```
+
+```{r}
+K = 8
+bin = matrix(list(), nrow = 1, ncol = K)
+for (i in 1:23) {
+  bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
+  }
+error = c()
+train_data = train_val_data
+train_data$check = rep(FALSE, nrow(train_data))
+for (i in 1:K) {
+  for (j in bin[i]) {
+    x_index = (j - 1) %/% 5 + 1
+    y_index = (j - 1) %% 5 + 1
+    for (k in 1:length(x_index)) {
+      lower_x = x_cut[x_index[k]]
+      upper_x = x_cut[x_index[k] + 1]
+      lower_y = y_cut[y_index[k]]
+      upper_y = y_cut[y_index[k] + 1]
+      train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+    }
+  }
+  CV_val = train_data[!train_data$check, ]
+  CV_train = train_data[train_data$check, ]
+  model = randomForest(as.factor(expert_label) ~ NDAI + SD + CORR, CV_train, mtry = 3, ntree = 25, importance = TRUE)
+  error = c(error, accuracy(predict(rf.opt, CV_val), CV_val$expert_label))
+  }
+mean(error)
+```
+
 * 4(d) 
 ```{r}
 #using splitting method 1
