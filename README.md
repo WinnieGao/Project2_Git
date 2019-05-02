@@ -15,5 +15,13 @@ The images under this repository was created by two Rmd files. The images in our
 ## Data Processing
 In our report, we come up with two totally different splitting methods, which are separately run in two Rmd files. Method1.Rmd corresponds to the first method and Method2.Rmd corresponds to the second. 
 
+## Classification Model
+1. KNN
+2. GLM
+3. LDA
+4. QDA
+5. SVM
+6. RandomForest
+
 
 
