@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 MAY 2019 17:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 MAY 2019 17:54
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1108,17 +1108,20 @@ File: 4(d)corr2.png Graphic file (type png)
 <use 4(d)corr2.png>
 Package pdftex.def Info: 4(d)corr2.png  used on input line 308.
 (pdftex.def)             Requested size: 213.39566pt x 132.42433pt.
-<4(d)image1.png, id=153, 594.22pt x 376.40625pt>
+ [11 <./4(d)1.png> <./4(d)2.png> <./4(d)3.png> <./4(d)4.png> <./4(d)ndai1.png> 
+<./4(d)ndai2.png> <./4(d)sd1.png> <./4(d)sd2.png> <./4(d)corr1.png> <./4(d)corr
+2.png>]
+<4(d)image1.png, id=166, 594.22pt x 376.40625pt>
 File: 4(d)image1.png Graphic file (type png)
 <use 4(d)image1.png>
 Package pdftex.def Info: 4(d)image1.png  used on input line 312.
 (pdftex.def)             Requested size: 170.71652pt x 108.13841pt.
-<4(d)image2.png, id=154, 591.20876pt x 374.39874pt>
+<4(d)image2.png, id=167, 591.20876pt x 374.39874pt>
 File: 4(d)image2.png Graphic file (type png)
 <use 4(d)image2.png>
 Package pdftex.def Info: 4(d)image2.png  used on input line 313.
 (pdftex.def)             Requested size: 170.71652pt x 108.1101pt.
-<4(d)image3.png, id=155, 595.22375pt x 373.395pt>
+<4(d)image3.png, id=168, 595.22375pt x 373.395pt>
 File: 4(d)image3.png Graphic file (type png)
 <use 4(d)image3.png>
 Package pdftex.def Info: 4(d)image3.png  used on input line 314.
@@ -1128,10 +1131,7 @@ Overfull \hbox (6.44115pt too wide) in paragraph at lines 312--315
 [][] [] [] 
  []
 
-[11 <./4(d)1.png> <./4(d)2.png> <./4(d)3.png> <./4(d)4.png> <./4(d)ndai1.png> <
-./4(d)ndai2.png> <./4(d)sd1.png> <./4(d)sd2.png> <./4(d)corr1.png> <./4(d)corr2
-.png> <./4(d)image1.png> <./4(d)image2.png> <./4(d)image3.png>] (./report.aux) 
-) 
+[12 <./4(d)image1.png> <./4(d)image2.png> <./4(d)image3.png>] (./report.aux) ) 
 Here is how much of TeX's memory you used:
  14227 strings out of 492649
  267878 string characters out of 6129622
@@ -1140,16 +1140,17 @@ Here is how much of TeX's memory you used:
  26545 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  54i,6n,73p,1266b,208s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
-sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/l
-ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (11 pages, 8180579 bytes).
+<
+/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></u
+sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
+al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (12 pages, 8183935 bytes).
 PDF statistics:
- 193 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 196 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  327 words of extra memory for PDF output out of 10000 (max. 10000000)
 

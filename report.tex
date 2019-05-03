@@ -282,7 +282,7 @@ We choose to consider 3 features at each split and 25 trees for each forest. We 
 \mbox{}\\
 \textbf{d. Changes after Modification of Splitting Method}
 
-The results in parts 4(a) and 4(b) change as we use splitting method 1.  
+The results in parts 4(a) and 4(b) change as we use splitting method 1 using QDA model.
 
 \mbox{}\\
 Mean and Covariance matrix for design matrix classified as cloud using splitting method 1
@@ -296,7 +296,7 @@ Mean and Covariance matrix for design matrix classified as cloud-free using spli
 \includegraphics[width = 7.5cm]{4(d)3}
 \includegraphics[width = 7.5cm]{4(d)4}
 
-Applying the same feature preference rule we use in 4(b), a good feature would be the one with larger variances and low covariances. In the covariance matrix, 
+Applying the same feature preference rule we use in 4(a), a good feature is the one with larger variances and low covariances. Among three features, SD is still the best features since it has the largest variance and lowest covariance.
 
 \includegraphics[width = 7.5cm]{4(d)ndai1}
 \includegraphics[width = 7.5cm]{4(d)ndai2}
@@ -307,11 +307,26 @@ Applying the same feature preference rule we use in 4(b), a good feature would b
 \includegraphics[width = 7.5cm]{4(d)corr1}
 \includegraphics[width = 7.5cm]{4(d)corr2}
 
-The box plots above show that 
+Similarly, we draw density plots to analyze any misclassification as we use splitting method 1. For NDAI, the cloud-free true labeled density plot is left-skewed and false positive density plot is right skewed, which means that the model tends to misclassify not-cloud data when the value of NDAI is large. While the false negative for cloud in NDAI has an approximately normal distribution, indicating that there is no specific pattern for misclassifying cloud as not-cloud. Considering the feature SD, the false positive density also indicate no particular pattern for misclassification but there are relatively large amount of could-free data are misclassified as cloud. Additionally, the false negative in SD feature shows that the model would classify could data as cloud-free when SD  is  small. For CORR, no special patterns can be found in  both cloud and could-free density plots, but many data are misclassified when only considering CORR. 
 
 \includegraphics[width = 6cm]{4(d)image1}
 \includegraphics[width = 6cm]{4(d)image2}
 \includegraphics[width = 6cm]{4(d)image3}
+
+Comparing the scatterplots in 4(b), we mark the difference among these graphs. In general, using splitting method 1 gives similar scatterplots, which indicates that different ways of splitting data have little impact on the QDA model. If we split the data differently, the distribution in each data group would be different. However, the model still work well and give similar classification. This agrees with the results in 3(b), where the test accuracy in QDA for the two splitting methods are relatively higher than other models. Hence, we confirm that future data will work well in QDA model. 
+
+\vspace{0.3cm}
+\mbox{}\\
+\textbf{e. Conclusion}
+
+Considering the cloud data are not independent and identically distributed, we come up with two splitting methods to train classification models. We implement GLM, LDA, QDA, KNN and SVM models on train and test data with different splitting methods. The results from two approaches show that QDA is the best model among them. To seak improvement on the classifier, we add a new feature to the model. Also, we run random forest and check the model performance. Without requirement of Gaussian distribution on the data, random forest gives better accuracy than QDA. Finally, we analyze misclassification in term of distinct data splitting approaches. It turns out that different splitting methods only slightly change the classification results, which means QDA will have stable performance on future data with different
+distributions. 
+
+\vspace{0.3cm}
+\mbox{}\\
+\textbf{Acknowlegement}
+
+As the project requires two data splitting methods, so each of us is responsible for one method. Winnie worte all the code and explaintions for method 2 and Caiyi are in charge of all parts for method 1. We meet almost every day to exchange our opinion on the project. R documentation and ISLR text book are our resources while we need help on model concept and implementation. 
 
 
 \end{document}
