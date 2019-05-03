@@ -333,5 +333,7 @@ distributions.
 
 As the project requires two data splitting methods, so each of us is responsible for one method. Winnie worte all the code and explaintions for method 2 and Caiyi are in charge of all parts for method 1. We meet almost every day to exchange our opinion on the project. R documentation and ISLR text book are our resources while we need help on model concept and implementation. 
 
+Github Link: \url{https://github.com/WinnieGao/Project2_Git}
+
 
 \end{document}
