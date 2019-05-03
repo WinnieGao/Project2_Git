@@ -25,5 +25,10 @@ In our report, we come up with two totally different splitting methods, which ar
 
 We train all 6 models on two differently splitted data. We use accuracy and precision to evaluate the performances of our models. 
 
+## Write-up
+Our final report is compiled as Report.pdf by Report.Rnw using Latex. Download Report.Rnw and click "compile pdf" to get recompile. There is no code in Report.Rnw. All code are in two Rmd files. 
+
+
+
 
 
