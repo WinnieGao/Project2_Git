@@ -6,15 +6,16 @@
 #' @param K number of folds to use in cross-validation
 #' @param loss_function a function used to evaluate performance of the classifier
 #' @param method 1,2 the index of two splitting method
+#' @param data data used to train model (training and validation data)
 #' @return a array with K objects. performance calculated by loss_function across K folds
 
-CVgeneric <- function(classifier, training_feature, training_label, K, loss_function, method) {
+CVgeneric <- function(classifier, training_feature, training_label, K, loss_function, method, data) {
   bin = matrix(list(), nrow = 1, ncol = K)
   for (i in 1:23) {
     bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
   }
   error = c()
-  train_data = train_val_data
+  train_data = data
   train_data$check = rep(FALSE, nrow(train_data))
   for (i in 1:K) {
     for (j in bin[i]) {
