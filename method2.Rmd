@@ -1,0 +1,732 @@
+---
+title: "Proj 2"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+* Import data
+```{r}
+image1 = read.delim(file = "image_data/image1.txt", header = FALSE, sep = "")
+colnames(image1) = c("y_coord", "x_coord", "expert_label", "NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")
+image2 = read.delim(file = "image_data/image2.txt", header = FALSE, sep = "")
+colnames(image2) = c("y_coord", "x_coord", "expert_label", "NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")
+image3 = read.delim(file = "image_data/image3.txt", header = FALSE, sep = "")
+colnames(image3) = c("y_coord", "x_coord", "expert_label", "NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")
+all = rbind(image1, image2, image3)
+```
+
+## Problem 1
+* 1(b)
+```{r}
+nrow(image1)
+sum(image1$expert_label == 1) / nrow(image1)
+sum(image1$expert_label == -1) / nrow(image1)
+sum(image1$expert_label == 0) / nrow(image1)
+```
+For image1, there are 115229 data points. We calculate % of pixels for the different classes: 17.77% classified as cloud, 43.78% as not cloud and 38.46% as unlabeled.
+```{r}
+nrow(image2)
+sum(image2$expert_label == 1) / nrow(image2)
+sum(image2$expert_label == -1) / nrow(image2)
+sum(image2$expert_label == 0) / nrow(image2)
+```
+For image2, there are 115110 data points. We calculate % of pixels for the different classes: 34.11% classified as cloud, 37.25% as not cloud and 28.64% as unlabeled.
+```{r}
+nrow(image3)
+sum(image3$expert_label == 1) / nrow(image3)
+sum(image3$expert_label == -1) / nrow(image3)
+sum(image3$expert_label == 0) / nrow(image3)
+```
+For image3, there are 115217 data points. We calculate % of pixels for the different classes: 18.44% classified as cloud, 29.29% as not cloud and 52.27% as unlabeled.
+```{r}
+nrow(all)
+sum(all$expert_label == 1) / nrow(all)
+sum(all$expert_label == -1) / nrow(all)
+sum(all$expert_label == 0) / nrow(all)
+```
+After we combined three image data sets, there are 345556 data points. We calculate % of pixels for the different classes: 23.43% classified as cloud, 36.78% as not cloud and 39.79% as unlabeled.
+
+```{r}
+library(ggplot2)
+label = image1$expert_label
+label[label == 1] = "cloud"
+label[label == -1] = "not cloud"
+label[label == 0] = "unlabeled"
+image1_plot = data.frame(x = image1$x_coord, y = image1$y_coord, label = label)
+ggplot(data = image1_plot,aes(x = x, y = -y, color = label)) + geom_point() + scale_color_manual(values=c("white", "grey", "black")) + xlab("Longitude") + ylab("Latitude") + ggtitle("Image1")
+```
+
+```{r}
+label = image2$expert_label
+label[label == 1] = "cloud"
+label[label == -1] = "not cloud"
+label[label == 0] = "unlabeled"
+image2_plot = data.frame(x = image2$x_coord, y = image2$y_coord, label = label)
+ggplot(data = image2_plot,aes(x = x, y = -y, color = label)) + geom_point() + scale_color_manual(values=c("white", "grey", "black")) + xlab("Longitude") + ylab("Latitude") + ggtitle("Image2")
+```
+```{r}
+label = image3$expert_label
+label[label == 1] = "cloud"
+label[label == -1] = "not cloud"
+label[label == 0] = "unlabeled"
+image3_plot = data.frame(x = image3$x_coord, y = image3$y_coord, label = label)
+ggplot(data = image3_plot,aes(x = x, y = -y, color = label)) + geom_point() + scale_color_manual(values=c("white", "grey", "black")) + xlab("Longitude") + ylab("Latitude") + ggtitle("Image3")
+```
+From the three plots, we can see the pattern that the pixels with same labels are connected to each other, and unmarked pixels stay around those marked as clouds. This pattern contradicts to our assumption that the samples are i.i.d., because the pixels adjcent to pixels marked as clouds are more likely to be marked as clouds.
+
+* (c)
+```{r}
+# pairwise relationship between features for image1
+features = data.frame(NDAI = image1$NDAI, SD = image1$SD, CORR = image1$CORR, DF = image1$DF, CF = image1$CF, BF = image1$BF, AF = image1$AF, AN = image1$AN)
+pairs(features, gap = 0, pch = ".", main = "Pairwise of features Image1") 
+```
+```{r}
+# pairwise relationship between features for image3
+features = data.frame(NDAI = image2$NDAI, SD = image2$SD, CORR = image2$CORR, DF = image2$DF, CF = image2$CF, BF = image2$BF, AF = image2$AF, AN = image2$AN)
+pairs(features, gap = 0, pch = ".", main = "Pairwise of features Image2")
+```
+```{r}
+# pairwise relationship between features for image3
+features = data.frame(NDAI = image3$NDAI, SD = image3$SD, CORR = image3$CORR, DF = image3$DF, CF = image3$CF, BF = image3$BF, AF = image3$AF, AN = image3$AN)
+pairs(features, gap = 0, pch = ".", main = "Pairwise of features Image3")
+```
+The three pairwise scatterplots all show that DF, CF, BF, AF and AN shows a linear relationship between each other, especially for AF and AN, AF and BF. However, we observe that data points in the third pairwise scatterplot spread more widely than in the first two pairwise sctterplots. The differences between three graphs can also show that the (linear) relationships decrease over time.
+
+After checking pairwise relationship plots, we study the relationship between each independent featues and their expert labels for each image and all data combined.
+```{r}
+#relationship between expert label and NDAI image1
+expert_NDAI = data.frame(label = as.character(image1$expert_label), CORR = image1$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR image1")
+```
+
+```{r}
+#relationship between expert label and NDAI image2
+expert_NDAI = data.frame(label =  as.character(image2$expert_label), CORR = image2$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR image2")
+```
+```{r}
+#relationship between expert label and NDAI image2
+expert_NDAI = data.frame(label =  as.character(image3$expert_label), CORR = image3$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR image3")
+```
+```{r}
+#relationship between expert label and NDAI image2
+expert_NDAI = data.frame(label =  as.character(all$expert_label), CORR = all$CORR)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = CORR, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. CORR All Data")
+```
+The boxplots for CORR based on different labels show that CORR is on average higher for pixels marked as cloud than as not cloud. CORR also has a higher variance for those marked as cloud.
+
+This conclusion contradicts to the statement in the paper that high correlations over cloud-free areas or low clouds are expected. This is because high correlations for clouds also occur under rare circumstances. More importantly, recklessly declare clear for high CORR pixels and cloudy for low CORR pixels will produce errors due to smoothness of surface terrain and the difference of attitudes of clouds.
+
+Therefore, we should also involve the feature SD to identify surfaces into our investigation. We first plot SD vs. Label independently for each image and all data.
+```{r}
+expert_SD = data.frame(label = as.character(image1$expert_label), SD = image1$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD image1")
+```
+```{r}
+expert_SD = data.frame(label = as.character(image2$expert_label), SD = image2$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD image2")
+```
+```{r}
+expert_SD = data.frame(label = as.character(image3$expert_label), SD = image3$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD image3")
+```
+```{r}
+expert_SD = data.frame(label = as.character(all$expert_label), SD = all$SD)
+expert_SD = expert_SD[which(expert_SD$label != "0"), ]
+ggplot(data = expert_SD, aes(x = label, y = SD, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. SD All Data")
+```
+From the boxplots for SD based on different labels, we can clearly see that the SD is higher for cloud pixels than those cloud-free ones. But the cloud-free pixels spread more widely. It can be explained that SD are usually small for radiation emanating from smooth surfaces.
+
+Finally, the thrid feature NDAI relates to the differences for isoreopic level of surface-leaving radiation between low-attitude clouds and snow-coved surfaces.
+```{r}
+expert_NDAI = data.frame(label = as.character(image1$expert_label), NDAI = image1$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI image1")
+```
+```{r}
+expert_NDAI = data.frame(label = as.character(image2$expert_label), NDAI = image2$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI image2")
+```
+```{r}
+expert_NDAI = data.frame(label = as.character(image3$expert_label), NDAI = image3$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI image3")
+```
+```{r}
+expert_NDAI = data.frame(label = as.character(all$expert_label), NDAI = all$NDAI)
+expert_NDAI = expert_NDAI[which(expert_NDAI$label != "0"), ]
+ggplot(data = expert_NDAI, aes(x = label, y = NDAI, group = label, fill = label)) + geom_boxplot() + scale_fill_discrete(name = "Label", labels = c("not cloud", "cloud")) + ggtitle("Label vs. NDAI All Data")
+```
+
+From the boxplots for NDAI based on different labels, we can clearly see that the NDAI is higher for cloud pixels than those cloud-free ones. The distrubition for cloud-free pixels are left skewed, while the distribution for pixels marked as cloud are roughly symmetric. The distribution for three different image data are roughly the same as well.
+
+## Problem 2
+* 2(a)
+Even though the three image data set represent the cloud dsitribution at different times at the same place, we still decide to combine the data into one to have more data for training. We also clear out the unlabeled data here because they are not helpful enough for classification problem. Since the data are not i.i.d., we cannot simply split the data by random. Our first method is, for each image data set, to divide all the data into 25 groups by cutting the image into 5*5 small images. For instance, data with y_coord from 2.0-78.2 and x_coord from 65.0-125.8 are in the same group. We randomly select 23 groups from these 25 groups as training/validation data and 2 groups as test data. In the 23 groups, we randomly sampled 18 groups as validation data. Splitting the data in this way looks like stratified sampling. Every time we sample a group wihout replacement and include all data points in that group. We can also see this method as combining small pixels into a much larger one in a visual way. This method can guarantee pixels that have high correlations (adjacent pixels) can be sampled at the same time (except those on the boundary). And the random sampling on the 25 groups can make sure that we are not too sticking to the patterns for the training data so that overfitting can be somewhat prevented. 
+```{r}
+all_clear = all[all$expert_label != 0, ]
+min_x = min(all_clear$x_coord)
+max_x = max(all_clear$x_coord)
+min_y = min(all_clear$y_coord)
+max_y = max(all_clear$y_coord)
+det_x = (max_x - min_x) / 5
+det_y = (max_y - min_y) / 5
+x_cut = seq(min_x, max_x + 2, det_x)
+y_cut = seq(min_y, max_y + 2, det_y)
+x_cut[length(x_cut)] = x_cut[length(x_cut)] + 1
+y_cut[length(y_cut)] = y_cut[length(y_cut)] + 1
+
+train_val = sample(1:25, 23, replace = FALSE)
+x_index = (train_val - 1) %/% 5 + 1
+y_index = (train_val - 1) %% 5 + 1
+train_val_data = all_clear
+train_val_data$check = rep(FALSE, nrow(train_val_data))
+for (i in 1:length(x_index)) {
+  lower_x = x_cut[x_index[i]]
+  upper_x = x_cut[x_index[i] + 1]
+  lower_y = y_cut[y_index[i]]
+  upper_y = y_cut[y_index[i] + 1]
+  train_val_data[train_val_data$x_coord >= lower_x & train_val_data$x_coord < upper_x & train_val_data$y_coord >= lower_y & train_val_data$y_coord < upper_y, "check"] = TRUE
+  train_val_data[train_val_data$x_coord >= lower_x & train_val_data$x_coord < upper_x & train_val_data$y_coord >= lower_y & train_val_data$y_coord < upper_y, "check"]
+}
+test_data = train_val_data[!train_val_data$check, ]
+test_data = within(test_data, rm(check))
+train_val_data = train_val_data[train_val_data$check, ]
+train_val_data = within(train_val_data, rm(check))
+
+x_train_index = sample(train_val, 18, replace = FALSE)
+x_index = (x_train_index - 1) %/% 5 + 1
+y_index = (x_train_index - 1) %% 5 + 1
+train_data = train_val_data
+train_data$check = rep(FALSE, nrow(train_data))
+for (i in 1:length(x_index)) {
+  lower_x = x_cut[x_index[i]]
+  upper_x = x_cut[x_index[i] + 1]
+  lower_y = y_cut[y_index[i]]
+  upper_y = y_cut[y_index[i] + 1]
+  train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+}
+validation_data = train_data[!train_data$check, ]
+train_data = train_data[train_data$check, ]
+```
+
+* 2(b)
+```{r}
+sum(test_data$expert_label == -1) / nrow(test_data)
+sum(validation_data$expert_label == -1) / nrow(validation_data)
+```
+Setting all labels to -1, the accuracy for test data is 0.520 and that for validation data is 0.270, which are relatively low. If the test data and validation data contain mostly -1, the trivial classifier will have a high average accuracy.
+
+* 2(c)
+```{r}
+library(ggbiplot)
+image1_clear = image1[image1$expert_label != 0,]
+pca_prcomp = prcomp(image1_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
+loadings = pca_prcomp$rotation
+cor(image1_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image1_clear$expert_label)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
+  geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
+  ggtitle("loadings")
+```
+
+```{r}
+image2_clear = image2[image2$expert_label != 0,]
+pca_prcomp = prcomp(image2_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
+loadings = pca_prcomp$rotation
+cor(image2_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image2_clear$expert_label)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
+  geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
+  ggtitle("loadings")
+```
+
+```{r}
+library(corrplot)
+library(ggbiplot)
+image3_clear = image3[image3$expert_label != 0,]
+pca_prcomp = prcomp(image3_clear[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
+loadings = pca_prcomp$rotation
+cor(image3[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], image3$expert_label)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
+  geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
+  ggtitle("loadings")
+```
+
+```{r}
+pca_prcomp = prcomp(all[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], scale. = TRUE)
+loadings = pca_prcomp$rotation
+cor(all[,c("NDAI", "SD", "CORR", "DF", "CF", "BF", "AF", "AN")], all$expert_label)
+ggbiplot(pca_prcomp, choices = 1:2, scale = 0, alpha = 0)
+ggplot() + geom_point(aes(x = loadings[, 1], y=loadings[, 2])) +
+  geom_text(aes(x = loadings[, 1], y=loadings[, 2], label=rownames(loadings))) +
+  ggtitle("loadings")
+```
+To find three best features, we first caculate the correlation between those features and the expert labels. The magnitude of the absolute values of the correlations represent how close the relationships are between features and expert labels. Larger correlation value means better features. We found that NDAI and CORR are better than others on average. 
+Then, we plot biplots and loadings on first two PCs to see how much each feature contributes to these PCs. We choose to use two PCs because they capture almost 90% of the data which is enough to represent the entire data set. The loading plots can illustrate the association between features and PCs. The larger the loading of a feature in a given PC, the more associated the feature is with that PC. After viewing the four loading plots, we observe that SD and DF have larger loadings than other features (expect NDAI and CORR). Considering there are other reasons that is more associated with scientific explanation, we decide to be consistent with the three features chosen in the paper, which are CORR, NDAI and SD.
+
+* 2(d)
+```{r}
+CVgeneric <- function(classifier, training_feature, training_label, K, loss_function) {
+  bin = matrix(list(), nrow = 1, ncol = K)
+  for (i in 1:23) {
+    bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
+  }
+  error = c()
+  train_data = train_val_data
+  train_data$check = rep(FALSE, nrow(train_data))
+  for (i in 1:K) {
+    CV_val = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
+    CV_train = data.frame(y_coord = c(), x_coord = c(), expert_label = c(), NDAI = c(), SD = c(), CORR = c(), DF = c(), CF = c(), BF = c(), AF = c(), AN = c())
+    for (j in bin[i]) {
+        x_index = (j - 1) %/% 5 + 1
+        y_index = (j - 1) %% 5 + 1
+        for (k in 1:length(x_index)) {
+          lower_x = x_cut[x_index[k]]
+          upper_x = x_cut[x_index[k] + 1]
+          lower_y = y_cut[y_index[k]]
+          upper_y = y_cut[y_index[k] + 1]
+          train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+        }
+    }
+    CV_val = train_data[!train_data$check, ]
+    CV_train = train_data[train_data$check, ]
+    currFormula = as.formula(paste(training_label, "~", 
+                                 paste(training_feature, collapse = "+"), sep = ""))
+    if (identical(classifier, glm)) {
+      model = classifier(currFormula, data = CV_train)
+      y_prob = predict(model, CV_val, type = "response")
+      y = CV_val[, training_label]
+      y_hat = rep(-1, length(y_prob))
+      y_hat[y_prob > 0.5] = 1
+      error = c(error, loss_function(y_hat, y))
+    }
+    if (identical(classifier, lda)) {
+      model = classifier(currFormula, data = CV_train)
+      y_prob = predict(model, CV_val)
+      y = CV_val[, training_label]
+      y_hat = y_prob$class
+      error = c(error, loss_function(y_hat, y))
+    }
+    if (identical(classifier, qda)) {
+      model = classifier(currFormula, data = CV_train)
+      y_prob = predict(model, CV_val)
+      y = CV_val[, training_label]
+      y_hat = y_prob$class
+      error = c(error, loss_function(y_hat, y))
+    }
+    if (identical(classifier, knn)) {
+      knn.pred = classifier(CV_train[, training_feature], CV_val[, training_feature], CV_train[, training_label], k = 3)
+      error = c(error, loss_function(knn.pred, CV_val[, training_label]))
+    }
+    if (identical(classifier, svm)) {
+      model = classifier(currFormula, data = CV_train, type = "C-classification", kernel = "linear", cost = 1)
+      y_hat = predict(model, CV_val)
+      y = CV_val[, training_label]
+      error = c(error, loss_function(y_hat, y))
+    }
+  }
+  return(error)
+}
+```
+
+## Problem 3
+3(a)
+To train the data, we try several different classification methods: Generalized Linear Model, Linear Discriminant Analysis, Quadratic Discriminant Analysis, K-nearest Neighbor and Support Vector Machine.
+For GLM, LDA and QDA, since, in our natural world, most phenomena can be approximated using Gaussion distribution, we assume our data sets are under Gaussian distribution, which means LDA and QDA are appliable. Since Gaussian distribution is exponential family, we can also apply GLM in our case. Since there is no specific assumptions for using KNN nad SVM, they are also satisfied.
+
+```{r}
+library(MASS)
+library(class)
+library(e1071)
+accuracy <- function(y_hat, y) {
+  return(mean(y_hat == y))
+}
+precision <- function(y_hat, y) {
+  return(sum(y_hat == 1 & y == 1) / sum(y_hat == 1))
+}
+
+glm_accuracy = CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+glm_accuracy_avg = mean(glm_accuracy)
+model_glm = glm(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_glm, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = rep(-1, length(y_prob))
+y_hat[y_prob > 0.5] = 1
+test_accuracy_glm = accuracy(y_hat, y)
+test_accuracy_glm
+
+lda_accuracy = CVgeneric(lda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+lda_accuracy_avg = mean(lda_accuracy)
+model_lda = lda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_lda, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_accuracy_lda = accuracy(y_hat, y)
+mean(lda_accuracy)
+test_accuracy_lda
+
+qda_accuracy = CVgeneric(qda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+qda_accuracy_avg = mean(qda_accuracy)
+model_qda = qda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_qda, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_accuracy_qda = accuracy(y_hat, y)
+test_accuracy_qda
+
+knn_accuracy = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy)
+knn_accuracy_avg = mean(knn_accuracy)
+knn.pred = knn(train_val_data[, c("NDAI", "SD", "CORR")], test_data[, c("NDAI", "SD", "CORR")], train_val_data[, "expert_label"], k = 3)
+test_accuracy_knn = accuracy(knn.pred, test_data[, "expert_label"])
+test_accuracy_knn
+
+svm_accuracy = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, accuracy, method = 2)
+svm_accuracy_avg = mean(svm_accuracy)
+model_svm = svm(expert_label ~ NDAI + SD + CORR, data = train_val_data, type = "C-classification", kernel = "linear", cost = 1)
+y_hat = predict(model_svm, test_data)
+y = test_data[, "expert_label"]
+test_accuracy_svm = accuracy(y_hat, y)
+
+model_accuracy = data.frame(glm = glm_accuracy, lda = lda_accuracy, qda = qda_accuracy, knn = knn_accuracy, svm = svm_accuracy)
+model_accuracy = rbind(model_accuracy, c(glm_accuracy_avg, lda_accuracy_avg, qda_accuracy_avg, knn_accuracy_avg, svm_accuracy_avg))
+rownames(model_accuracy) = c(seq(1, 8), "average")
+test_accuracy_svm = 0.908403
+test_accuracy = data.frame(glm = test_accuracy_glm, lda = test_accuracy_lda, qda = test_accuracy_qda, knn = test_accuracy_knn, svm = test_accuracy_svm)
+test_accuracy
+model_accuracy
+```
+For our first splitting method,
+For the second one, the cross-validation average accuracies demonstrate that QDA have the best performance on validation data. QDA has a high accuracy on test data, but LDA performs better. GLM has lowest average cross-validation accuracy on validation set and svm performs worst on test data.
+
+Having a high accuracy is not enough to evaluate a particular model. Suppose we a trivial classifier, which is predicting all data points as 1, we may still get a very high accuracy since most data points are marked as 1 in our training and test data set, but it by no means proves this model is good.
+
+Therefore, we come up with two new metrics that can avoid this kind of coincidence: Among all pixels labeled as cloud, what is the proportion of the pixels that have true label as cloud. Simiarly, Among all pixels with true label as cloud, what is the proportion of pixels we predicted as cloud. The first is called "precision" and the second one is called "recall". Since they defined very similarly and have similar effect, in this report, we only use precision as a new metric to evaluate our model to save time.
+```{r}
+glm_precision = CVgeneric(glm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, precision)
+glm_precision_avg = mean(glm_precision)
+model_glm = glm(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_glm, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = rep(-1, length(y_prob))
+y_hat[y_prob > 0.5] = 1
+test_precision_glm = precision(y_hat, y)
+mean(glm_precision)
+test_precision_glm
+
+lda_precision = CVgeneric(lda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, precision)
+lda_precision_avg = mean(lda_precision)
+model_lda = lda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_lda, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_precision_lda = precision(y_hat, y)
+mean(lda_precision)
+test_precision_lda
+
+qda_precision = CVgeneric(qda, c("NDAI", "SD", "CORR"), c("expert_label"), 8, precision)
+qda_precision_avg = mean(qda_precision)
+model_qda = qda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+y_prob = predict(model_qda, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_precision_qda = precision(y_hat, y)
+mean(qda_precision)
+test_precision_qda
+
+knn_precision = CVgeneric(knn, c("NDAI", "SD", "CORR"), c("expert_label"), 8, precision)
+knn_precision_avg = mean(knn_precision)
+knn.pred = knn(train_val_data[, c("NDAI", "SD", "CORR")], test_data[, c("NDAI", "SD", "CORR")], train_val_data[, "expert_label"], k = 3)
+test_precision_knn = precision(knn.pred, test_data[, "expert_label"])
+mean(knn_precision)
+test_precision_knn
+
+svm_precision = CVgeneric(svm, c("NDAI", "SD", "CORR"), c("expert_label"), 8, precision)
+svm_precision_avg = mean(svm_precision)
+model_svm = svm(expert_label ~ NDAI + SD + CORR, data = train_val_data, type = "C-classification", kernel = "linear", cost = 1)
+y_hat = predict(model_svm, test_data)
+y = test_data[, "expert_label"]
+test_precision_svm = precision(y_hat, y)
+mean(svm_precision)
+test_precision_svm
+
+model_precision = data.frame(glm = glm_accuracy, lda = lda_precision, qda = qda_precision, knn = knn_precision, svm = svm_precision)
+model_precision = rbind(model_precision, c(glm_precision_avg, lda_precision_avg, qda_precision_avg, knn_precision_avg, svm_precision_avg))
+rownames(model_precision) = c(seq(1, 8), "average")
+test_precision = data.frame(glm = test_precision_glm, lda = test_precision_lda, qda = test_precision_qda, knn = test_precision_knn, svm = test_precision_svm)
+model_precision
+```
+
+
+
+3(b)
+```{r}
+library(ROCR)
+library(pROC)
+rocplot <- function(pred, truth, main) {
+  predob = prediction(pred, truth)
+  perf = performance(predob, "tpr", "fpr")
+  return(perf)
+}
+bestalpha <- function(x, y, alpha) {
+  minsqrdist = 1000000
+  index = 0
+  for (i in 1:length(x)) {
+    if ((x[i] ^ 2 + (y[i] - 1) ^ 2) < minsqrdist) {
+      minsqrdist = x[i] ^ 2 + (y[i] - 1) ^ 2
+      index = i
+    }
+  }
+  return(index)
+}
+
+
+glmfit.opt = glm(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+fitted_glm = predict(glmfit.opt, test_data)
+perf_glm = rocplot(fitted_glm, test_data[, "expert_label"], "ROC of GLM test")
+x_glm = slot(perf_glm, 'x.values')[[1]]
+y_glm = slot(perf_glm, 'y.values')[[1]]
+alpha_glm = slot(perf_glm, "alpha.values")[[1]]
+index_glm = bestalpha(x_glm, y_glm, alpha_glm)
+glm = data.frame(x_axis = x_glm, y_axis = y_glm, label = rep("GLM", length(x_glm)))
+ggplot(glm, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_glm[index_glm], y = y_glm[index_glm], color = "red"), show.legend = FALSE) + annotate("text", x = x_glm[index_glm], y = y_glm[index_glm] + 0.08, label = "alpha = -0.2624315" ) + ggtitle("ROC for GLM") + xlab("False Positive Rate") + ylab("True Positive Rate")
+roc(test_data[, "expert_label"], fitted_glm, plot = TRUE, print.auc = TRUE)
+x_glm[index_glm] ^ 2 + (y_glm[index_glm] - 1) ^ 2
+
+
+svmfit.opt = svm(expert_label ~ NDAI + SD + CORR, data = train_val_data, kernel = "linear", cost = 1)
+fitted_svm = attributes(predict(svmfit.opt, test_data, decision.values = TRUE))$decision.values
+perf_svm = rocplot(fitted_svm, test_data[, "expert_label"], "ROC of SVM test")
+x_svm = slot(perf_svm, 'x.values')[[1]]
+y_svm = slot(perf_svm, 'y.values')[[1]]
+alpha_svm = slot(perf_svm, "alpha.values")[[1]]
+index_svm = bestalpha(x_svm, y_svm, alpha_svm)
+svm = data.frame(x_axis = x_svm, y_axis = y_svm, label = rep("SVM", length(x_svm)))
+ggplot(svm, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_svm[index_svm], y = y_svm[index_svm], color = "red"), show.legend = FALSE) + annotate("text", x = x_svm[index_svm], y = y_svm[index_svm] + 0.08, label = "alpha = 0.01198434" ) + ggtitle("ROC for SVM") + xlab("False Positive Rate") + ylab("True Positive Rate")
+x_svm[index_svm] ^ 2 + (y_svm[index_svm] - 1) ^ 2
+roc(test_data[, "expert_label"], fitted_svm, plot = TRUE, print.auc = TRUE)
+
+
+
+ldafit.opt = lda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+fitted_lda = predict(ldafit.opt, test_data)
+perf_lda = rocplot(fitted_lda$posterior[,2], test_data[, "expert_label"], "ROC of LDA test")
+x_lda = slot(perf_lda, 'x.values')[[1]]
+y_lda = slot(perf_lda, 'y.values')[[1]]
+alpha_lda = slot(perf_lda, "alpha.values")[[1]]
+index_lda = bestalpha(x_lda, y_lda, alpha_lda)
+lda = data.frame(x_axis = x_lda, y_axis = y_lda, label = rep("LDA", length(x_lda)))
+ggplot(lda, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_lda[index_lda], y = y_lda[index_lda], color = "red"), show.legend = FALSE) + annotate("text", x = x_lda[index_lda], y = y_lda[index_lda] + 0.08, label = "alpha = 0.1961443" ) + ggtitle("ROC for LDA") + xlab("False Positive Rate") + ylab("True Positive Rate")
+x_lda[index_lda] ^ 2 + (y_lda[index_lda] - 1) ^ 2
+roc(test_data[, "expert_label"], fitted_lda$posterior[,2], plot = TRUE, print.auc = TRUE)
+
+qdafit.opt = qda(expert_label ~ NDAI + SD + CORR, data = train_val_data)
+fitted_qda = predict(qdafit.opt, test_data)
+perf_qda = rocplot(fitted_qda$posterior[,2], test_data[, "expert_label"], "ROC of QDA test")
+x_qda = slot(perf_qda, 'x.values')[[1]]
+y_qda = slot(perf_qda, 'y.values')[[1]]
+alpha_qda = slot(perf_qda, "alpha.values")[[1]]
+index_qda = bestalpha(x_qda, y_qda, alpha_qda)
+qda = data.frame(x_axis = x_qda, y_axis = y_qda, label = rep("QDA", length(x_qda)))
+ggplot(qda, aes(x = x_axis, y = y_axis)) + geom_line() + geom_point(aes(x = x_qda[index_qda], y = y_qda[index_qda], color = "red"), show.legend = FALSE) + annotate("text", x = x_qda[index_qda], y = y_qda[index_qda] + 0.08, label = "alpha = 0.04849714" ) + ggtitle("ROC for QDA") + xlab("False Positive Rate") + ylab("True Positive Rate")
+x_qda[index_qda] ^ 2 + (y_qda[index_qda] - 1) ^ 2
+roc(test_data[, "expert_label"], fitted_qda$posterior[,2], plot = TRUE, print.auc = TRUE)
+```
+Our ROC curves are drawn below with cutoff value we choose marked:
+
+
+
+In each model, we choose the cutoff value that has the smallest distance to (0, 1). We do so because we want to maximize true positive rate and minimize false positive rate at the same time. We did not put more weight on true positive rate because, unlike the medical cases, the incorrect classifications of both clouded or cloud-free pixels have same consequence on our result.
+
+## Problem 4
+After comparing two splitting methods and different classification methods, we believe that, in our case, the second splitting method is better than the first one, and QDA has best performance on this splitted data.
+
+* 4(a)
+```{r}
+train_cloud = train_val_data[train_val_data$expert_label == 1, c("NDAI", "SD", "CORR")]
+colMeans(train_cloud)
+cov(train_cloud)
+train_empty = train_val_data[train_val_data$expert_label == -1, c("NDAI", "SD", "CORR")]
+colMeans(train_empty)
+cov(train_empty)
+```
+The means and covariances of each class are shown as follows:
+
+The high variances (covariances between features themselves) means that the corresponding features have a lot of expressiveness. In other words, features with low variances are close to a constant. In our case, we prefer features with larger variances. For the rest covariances (covariances between different features), features with high covariances have a lot of redundancy for each other. Since we hope the features can capture as much as possible, we prefer features with low covariances.
+
+In our covariance matrices, SD has very high variance and relatively low covariance. SD is the best feature of these three. CORR has lowest variance and relatively high covariance. We may want to improve our model by changing this feature to another.
+
+* 4(b)
+For our best classification model which is QDA, we analyze the misclassification by showing ranges of feature values. We also apply our trained model to three different image data sets and plot the misclassified data point on the original map to check if they are in particular regrions.
+
+In the test data, we pick all misclassified data points and plot boxplots for each feature based on two different classification errors (False Positive and False Negative).
+```{r}
+library(ggplot2)
+pre_result = fitted_qda$class
+mis = test_data[pre_result != test_data[, "expert_label"], ]
+correct = test_data[pre_result == test_data[, "expert_label"], ]
+
+
+ggplot(correct, aes(x = as.factor(expert_label), y = NDAI)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled NDAI Range")
+
+not_cloud_NDAI = correct[correct$expert_label == -1,]
+not_cloud_NDAI$label = rep("True Label (cloud-free)", nrow(not_cloud_NDAI))
+false_pos_NDAI = mis[mis$expert_label == 1,]
+false_pos_NDAI$label = rep("False Positive", nrow(false_pos_NDAI))
+plot1 = rbind(not_cloud_NDAI, false_pos_NDAI)
+ggplot(plot1, aes(x = NDAI, color = label)) + geom_density() + ggtitle("Density Curve for NDAI: Cloud-free vs. False Positive")
+
+cloud_NDAI = correct[correct$expert_label == 1,]
+cloud_NDAI$label = rep("True Label (cloud)", nrow(cloud_NDAI))
+false_neg_NDAI = mis[mis$expert_label == -1,]
+false_neg_NDAI$label = rep("False Negative", nrow(false_neg_NDAI))
+plot2 = rbind(cloud_NDAI, false_neg_NDAI)
+ggplot(plot2, aes(x = NDAI, color = label)) + geom_density() + ggtitle("Density Curve for NDAI: Cloud vs. False Negative")
+
+not_cloud_SD = correct[correct$expert_label == -1,]
+not_cloud_SD$label = rep("True Label (cloud-free)", nrow(not_cloud_SD))
+false_pos_SD = mis[mis$expert_label == 1,]
+false_pos_SD$label = rep("False Positive", nrow(false_pos_SD))
+plot3 = rbind(not_cloud_SD, false_pos_SD)
+ggplot(plot3, aes(x = SD, color = label)) + geom_density() + ggtitle("Density Curve for SD: Cloud-free vs. False Positive")
+
+cloud_SD = correct[correct$expert_label == 1,]
+cloud_SD$label = rep("True Label (cloud)", nrow(cloud_SD))
+false_neg_SD = mis[mis$expert_label == -1,]
+false_neg_SD$label = rep("False Negative", nrow(false_neg_SD))
+plot4 = rbind(cloud_SD, false_neg_SD)
+ggplot(plot4, aes(x = SD, color = label)) + geom_density() + ggtitle("Density Curve for SD: Cloud vs. False Negative")
+
+not_cloud_CORR = correct[correct$expert_label == -1,]
+not_cloud_CORR$label = rep("True Label (cloud-free)", nrow(not_cloud_CORR))
+false_pos_CORR = mis[mis$expert_label == 1,]
+false_pos_CORR$label = rep("False Positive", nrow(false_pos_CORR))
+plot5 = rbind(not_cloud_CORR, false_pos_CORR)
+ggplot(plot5, aes(x = CORR, color = label)) + geom_density() + ggtitle("Density Curve for CORR: Cloud-free vs. False Positive")
+
+cloud_CORR = correct[correct$expert_label == 1,]
+cloud_CORR$label = rep("True Label (cloud)", nrow(cloud_CORR))
+false_neg_CORR = mis[mis$expert_label == -1,]
+false_neg_CORR$label = rep("False Negative", nrow(false_neg_CORR))
+plot6 = rbind(cloud_CORR, false_neg_CORR)
+ggplot(plot6, aes(x = CORR, color = label)) + geom_density() + ggtitle("Density Curve for CORR: Cloud vs. False Negative")
+
+
+
+
+ggplot(mis, aes(x = as.factor(expert_label), y = NDAI)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified NDAI Range")
+
+ggplot(correct, aes(x = as.factor(expert_label), y = SD)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled SD Range")
+ggplot(mis, aes(x = as.factor(expert_label), y = SD)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified SD Range")
+
+ggplot(correct, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("Not Cloud", "Cloud")) + xlab("Classification") + ggtitle("True Labeled CORR Range")
+ggplot(mis, aes(x = as.factor(expert_label), y = CORR)) + geom_boxplot() + scale_x_discrete(breaks = c("-1","1"), labels = c("False Positive", "False Negative")) + xlab("Classification") + ggtitle("Misclassified CORR Range")
+```
+
+Then, we use our trained QDA model to predict data points in three image data sets (data points with expert label of 0 are excluded)
+
+```{r}
+pred_image1 = predict(qdafit.opt, image1_clear)
+ggplot(image1_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image1") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+
+image1_result
+ggplot(image1_result, aes(x = SD))
+
+pred_image2 = predict(qdafit.opt, image2_clear)
+image2_result = data.frame(x = image2_clear$x_coord, y = image2_clear$y_coord, label = pred_image2$class)
+ggplot(image2_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image2") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+
+pred_image3 = predict(qdafit.opt, image3_clear)
+image3_result = data.frame(x = image3_clear$x_coord, y = image3_clear$y_coord, label = pred_image3$class)
+ggplot(image3_result, aes(x = x, y = -y, color = as.factor(label))) + geom_point() + xlab("Longituge") + ylab("Latitude") + ggtitle("Predicted Label Image3") + scale_colour_discrete(name = "Predicted Label", breaks=c(-1, 1), labels = c("Not CLoud", "Cloud"))
+accuracy(pred_image3$class, image3_clear$expert_label)
+```
+
+* 4(c)
+Based on the analysis in the previous two sections, we come up with two ways to improve our classification.
+First, as we mentioned above, the three features selected are not expressive enough to train our model. We decide to add a new feature to train our QDA. Recall the PCA figures we plotted in the second part. Among the rest of the five raw features, DF stands out as the best. Therefore, we add DF as a new feature and train our QDA classification model again on our training data. The final accuracy on test data arises from 0.98930 to 0.99762, which is better than the original QDA model. For future data without expert label, we believe our data can work well because our average accuracy over 8 folds cross validation and test accuracy are quite high. Moreover, qda won't take that much time to train and predict as other classification methods like svm and knn.
+```{r}
+qda_accuracy_new = CVgeneric(qda, c("NDAI", "CORR", "SD", "DF"), c("expert_label"), 8, accuracy)
+qda_accuracy_avg_new = mean(qda_accuracy_new)
+qda_accuracy_new
+qda_accuracy_avg_new
+set.seed(100)
+model_qda_new = qda(expert_label ~ NDAI + SD + CORR + DF, data = train_val_data)
+y_prob = predict(model_qda_new, test_data, type = "response")
+y = test_data[, "expert_label"]
+y_hat = y_prob$class
+test_accuracy_qda_new = accuracy(y_hat, y)
+test_accuracy_qda_new
+```
+
+Secondly, QDA requires that the data should be Gaussian distribution, but we cannot ensure that the future data are strictly meet this requirement. Therefore, we also tried Random Forest to train our data. Since we don't have a large number features, Random Forest is quitely suitable in our case.
+
+We choose to consider 3 features at each split 25 nodes in each tree. We first use cross-validation to have accuracies over 8 folds. The average accuracy is 0.9975. Then we train our model on entire training data and get a accuracy of 0.9576 on test data. Even though the accuracies might be slightly worse than those of QDA, since random forest do not have particular assumption on the data set, the accuracy on future data should remain around the same.
+```{r}
+library(randomForest)
+rf = train_val_data
+set.seed(100)
+randomForest(as.factor(expert_label) ~ NDAI + SD + CORR, data = train_val_data, mtry = 3, ntree = 25, importance = TRUE)
+accuracy(predict(rf.opt, test_data), test_data$expert_label)
+
+rf.opt4 = randomForest(as.factor(expert_label) ~ NDAI + SD + CORR + DF, data = train_val_data, mtry = 4, ntree = 25, importance = TRUE)
+accuracy(predict(rf.opt4, test_data), test_data$expert_label)
+
+importance(rf.opt4)
+varImpPlot(rf.opt)
+varImpPlot(rf.opt4)
+```
+
+
+```{r}
+K = 8
+bin = matrix(list(), nrow = 1, ncol = K)
+for (i in 1:23) {
+  bin[[1, i %% K + 1]] = c(bin[[1, i %% K + 1]], i)
+  }
+error = c()
+train_data = train_val_data
+train_data$check = rep(FALSE, nrow(train_data))
+for (i in 1:K) {
+  for (j in bin[i]) {
+    x_index = (j - 1) %/% 5 + 1
+    y_index = (j - 1) %% 5 + 1
+    for (k in 1:length(x_index)) {
+      lower_x = x_cut[x_index[k]]
+      upper_x = x_cut[x_index[k] + 1]
+      lower_y = y_cut[y_index[k]]
+      upper_y = y_cut[y_index[k] + 1]
+      train_data[train_data$x_coord >= lower_x & train_data$x_coord < upper_x & train_data$y_coord >= lower_y & train_data$y_coord < upper_y, "check"] = TRUE
+    }
+  }
+  CV_val = train_data[!train_data$check, ]
+  CV_train = train_data[train_data$check, ]
+  model = randomForest(as.factor(expert_label) ~ NDAI + SD + CORR, CV_train, mtry = 3, ntree = 25, importance = TRUE)
+  error = c(error, accuracy(predict(rf.opt, CV_val), CV_val$expert_label))
+}
+mean(error)
+
+
+```
+
+```{r}
+library(neuralnet)
+nn = neuralnet(expert_label ~ NDAI + SD + CORR, data = train_val_data, hidden = 1, act.fct = "logistic",
+                linear.output = FALSE)
+```
+
