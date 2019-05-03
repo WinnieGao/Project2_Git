@@ -26,7 +26,7 @@ In our report, we come up with two totally different splitting methods, which ar
 We train all 6 models on two differently splitted data. We use accuracy and precision to evaluate the performances of our models. 
 
 ## CVgeneric function
-To train and compare the performance of each classification model in differently splitted data, we write a generic function that produce cross validation data set and evaluate model performance on validation data set. 
+To train and compare the performance of each classification model in differently splitted data, we write a generic function that produce cross validation data set and evaluate model performance on validation data set. This function takes a classifier, training label, training features, number of folds, loss function, and splitting methods (1 or 2). It returns the result according to the loss function passed in across all K folds.
 
 ## Write-up
 Our final report is compiled as Report.pdf by Report.Rnw using Latex. Download Report.Rnw and click "compile pdf" to get recompile. There is no code in Report.Rnw. All code are in two Rmd files. 
